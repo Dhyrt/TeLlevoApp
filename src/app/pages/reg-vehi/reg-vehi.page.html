@@ -22,7 +22,7 @@
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Patente</ion-label>
-            <ion-input type="text" placeholder="Ingrese Patente" formControlName="patente"></ion-input>
+            <ion-input type="text" placeholder="Ej: AA-AA-11" formControlName="patente"></ion-input>
           </ion-item>
           <ion-list>
             <ion-item>
@@ -52,7 +52,7 @@
             </ion-list>
           <ion-item>
             <ion-label position="stacked">Número de licencia</ion-label>
-            <ion-input type="number" placeholder="Ingrese numero de licencia "formControlName="licencia"></ion-input>
+            <ion-input type="number" placeholder="Ej: 12345678"formControlName="licencia"></ion-input>
           </ion-item>
           <ion-button type="submit" [disabled]="!vehiculo.valid" color="secondary">REGISTRAR</ion-button>
         </form>
