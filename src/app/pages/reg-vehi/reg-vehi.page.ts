@@ -14,7 +14,7 @@ export class RegVehiPage implements OnInit {
     marca: new FormControl ('',[Validators.required, Validators.minLength(2)]),
     modelo: new FormControl ('',[Validators.required, Validators.minLength(2)]),
     patente: new FormControl ('',[Validators.required,Validators.pattern('[A-Z]{2}-[A-Z]{2}-[0-9]{2}')]),
-    anio: new FormControl ('',[Validators.required,Validators.min(2016),Validators.max(2022)]),
+    anio: new FormControl ('',[Validators.required]),
     color: new FormControl('',[Validators.required]),
     licencia: new FormControl ('',[Validators.required,Validators.min(11111111),Validators.max(99999999)])
   });

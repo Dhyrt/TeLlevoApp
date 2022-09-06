@@ -20,6 +20,9 @@ ion-card {
     ion-radio-group{
         margin: 1rem 0px 1rem 0px;
     }
+    ion-card-title{
+       --font-size: 29px;
+    }
 }
 
 @media (max-width: 400px) {
