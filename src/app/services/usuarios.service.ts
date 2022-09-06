@@ -58,6 +58,9 @@ export class UsuariosService {
   obtenerVehiculo(patente: string){
     return this.vehiculos.find(auto => auto.patente == patente);
   }
+  obtenerVehiculos(){
+    return this.vehiculos;
+  }
 
   //Login
   validarLogin(nombre, password){
