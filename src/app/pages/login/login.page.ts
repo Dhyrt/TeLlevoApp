@@ -11,22 +11,25 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class LoginPage implements OnInit {
 
-  usuario: string;
+  correo: string;
   password: string;
 
-  constructor(private toastController: ToastController, private router: Router, 
-      //private usuarioService: UsuarioService
-      ) { }
+  constructor(private toastController: ToastController, private router: Router, private usuarioService: UsuariosService) { }
 
   ngOnInit() {
-    }
-  logearse(){
-    if (this.usuario == 'admin' && this.password == 'admin') {
-      this.router.navigate(['/admin']);
+  }
+
+  login(){
+    var usuarioLogin = this.usuarioService.validarLogin(this.correo, this.password);
+    if ( usuarioLogin != undefined ) {
+      if (this.correo == 'admin' && this.password == 'admin'){
+        this.router.navigate(['/admin']);
+      }else{
+        this.router.navigate(['/inicio']);
+      }
     }else{
       this.toastError('bottom','Usuario o contraseña Incorrectos!!!');
     }
-
   }
   async toastError(position:'bottom', message: string) {
     const toast = await this.toastController.create({

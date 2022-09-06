@@ -5,32 +5,41 @@ import { Injectable } from '@angular/core';
 })
 export class UsuariosService {
 
-  usuarios: any[] = []
+  usuarios: any[] = [
+    {
+      run: '11.111.111-1',
+      nombre: 'admin',
+      apellido: 'admin',
+      correo: 'admin',
+      password: 'admin',
+      tipo_usuario: 'administrador'
+    }
+  ]
   vehiculos: any[] = []
 
   constructor() { }
 
   //Metodos usuario
   agregarUsuario(usuario): boolean{
-    if ( this.obtenerUsuario(usuario.rut) == undefined ) {
+    if ( this.obtenerUsuario(usuario.run) == undefined ) {
       this.usuarios.push(usuario);
       return true;
     }
     return false;
   }
-  eliminarUsuario(rut: string){
+  eliminarUsuario(run: string){
     this.usuarios.forEach((usu, index) => {
-      if (usu.rut == rut) {
+      if (usu.rut == run) {
         this.usuarios.splice(index, 1);
       }
     });
   }
   actualizarUsuario(usuario){
-    var index = this.usuarios.findIndex(usu => usu.rut == usuario.rut);
+    var index = this.usuarios.findIndex(usu => usu.run == usuario.run);
     this.usuarios[index] = usuario;
   }
-  obtenerUsuario(rut: string){
-    return this.usuarios.find(usu => usu.rut == rut);
+  obtenerUsuario(run: string){
+    return this.usuarios.find(usu => usu.run == run);
   }
   obtenerUsuarios(){
     return this.usuarios;
@@ -63,7 +72,7 @@ export class UsuariosService {
   }
 
   //Login
-  validarLogin(nombre, password){
-    return this.usuarios.find(usu => usu.nombre == nombre && usu.password == password);
+  validarLogin(correo, password){
+    return this.usuarios.find(usu => usu.correo == correo && usu.password == password);
   }
 }
