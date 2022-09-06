@@ -50,4 +50,10 @@ ion-card {
     .logo{
         width: 150px;
     }
+    .fondo {
+        height: 120vh;
+        background-image: url("../../../assets/img/fondo.jpg");
+        background-size: cover;
+        
+    }
 }

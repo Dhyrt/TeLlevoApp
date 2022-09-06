@@ -22,10 +22,12 @@ export class LoginPage implements OnInit {
   login(){
     var usuarioLogin = this.usuarioService.validarLogin(this.correo, this.password);
     if ( usuarioLogin != undefined ) {
-      if (this.correo == 'admin' && this.password == 'admin'){
+      if (usuarioLogin.tipo_usuario == 'administrador'){
         this.router.navigate(['/admin']);
-      }else{
+      }else if(usuarioLogin.tipo_usuario == 'pasajero'){
         this.router.navigate(['/inicio']);
+      }else if(usuarioLogin.tipo_usuario == 'conductor'){
+        this.router.navigate(['/inicio-c']);
       }
     }else{
       this.toastError('bottom','Usuario o contraseña Incorrectos!!!');

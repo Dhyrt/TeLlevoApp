@@ -13,6 +13,22 @@ export class UsuariosService {
       correo: 'admin',
       password: 'admin',
       tipo_usuario: 'administrador'
+    },
+    {
+      run: '22.222.222-2',
+      nombre: 'jhona',
+      apellido: 'quiro',
+      correo: 'jh.quiro@duocuc.cl',
+      password: 'jhona123',
+      tipo_usuario: 'pasajero'
+    },
+    {
+      run: '33.333.333-3',
+      nombre: 'caro',
+      apellido: 'lina',
+      correo: 'ca.lina@duocuc.cl',
+      password: 'caro123',
+      tipo_usuario: 'conductor'
     }
   ]
   vehiculos: any[] = []
@@ -29,7 +45,7 @@ export class UsuariosService {
   }
   eliminarUsuario(run: string){
     this.usuarios.forEach((usu, index) => {
-      if (usu.rut == run) {
+      if (usu.run == run) {
         this.usuarios.splice(index, 1);
       }
     });
@@ -61,7 +77,7 @@ export class UsuariosService {
     });
   }
   actualizarVehiculo(vehiculo){
-    var index = this.vehiculos.findIndex(auto => auto.rut == vehiculo.patente);
+    var index = this.vehiculos.findIndex(auto => auto.patente == vehiculo.patente);
     this.vehiculos[index] = vehiculo;
   }
   obtenerVehiculo(patente: string){

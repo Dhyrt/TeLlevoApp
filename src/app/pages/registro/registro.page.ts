@@ -16,11 +16,11 @@ export class RegistroPage implements OnInit {
                                   Validators.minLength(3)]),
     apellido: new FormControl('', [Validators.required, 
                                     Validators.minLength(4)]),
-    correo: new FormControl('', [Validators.required, Validators.pattern('[A-Za-z]{2,10}.[A-Za-z]{2,20}@[A-Za-z.]{6,13}.cl')]),
+    correo: new FormControl('', [Validators.required, Validators.pattern('[A-Za-z]{2,10}.[A-Za-z]{2,20}@duocuc.cl$|[A-Za-z]{2,10}.[A-Za-z]{2,20}@profesor.duoc.cl$')]),
     password: new FormControl('', [Validators.required, 
                                    Validators.minLength(6), 
                                    Validators.maxLength(18)]),
-    tipo_usuario: new FormControl('')
+    tipo_usuario: new FormControl('', Validators.required)
   });
 
   verificar_password: string;

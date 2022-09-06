@@ -1,0 +1,95 @@
+.fondo {
+    height: 100vh;
+    background-size: cover;
+    .titulo{
+        margin: 1rem 0px 0px 0px;
+        text-align: center;
+    }
+}
+
+ion-card {
+    margin: 0 auto;
+    top: 1vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0px 1rem 0px;
+    border-radius: 2%;
+    ion-radio-group{
+        display: flex;
+    }
+    ion-radio-group{
+        margin: 1rem 0px 1rem 0px;
+    }
+    ion-item {
+        --background: none;
+    }
+
+}
+
+@media (max-width: 400px) {
+    ion-card {
+        width: 85vw;
+        padding: 1rem 1rem 1rem 1rem;
+        border-radius: 0%;
+        ion-radio-group{
+            display: block;
+        }
+        ion-card-title{
+            font-size: 20px;
+        }
+        ion-button{
+            margin: 5px 20px 20px 20px;
+        }
+        ion-item{
+            font-size: 15px;
+        }
+        ion-button{
+            width: 87px;
+            font-size: 12px;
+        }
+        .botones{
+            display: flex;
+            align-items: center;
+            ion-button{
+                margin-left: 0px;
+                padding: 0px;
+            }
+        }
+    }
+    ion-list{
+        top: 20vh;
+        width: 85vw;
+        padding: 1rem 1rem 1rem 1rem;
+        border-radius: 0%;
+        ion-radio-group{
+            display: block;
+        }
+        ion-card-title{
+            font-size: 20px;
+        }
+        ion-button{
+            margin: 5px 20px 20px 20px;
+        }
+        ion-item{
+            font-size: 15px;
+        }
+
+    }
+}
+
+.logo{
+    width: 200px;
+}
+
+@media(max-width: 400px){
+    .logo{
+        width: 150px;
+    }
+    .titulo{
+        h1{
+            font-size: 19px;
+        }
+    }
+}
