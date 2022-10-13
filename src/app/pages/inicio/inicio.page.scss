@@ -1,0 +1,88 @@
+.logo{
+    width: 200px;
+}
+
+@media(max-width: 400px){
+    .logo{
+        width: 130px;
+        justify-content: left;
+    }
+}
+
+.inicio{
+    margin: 0 auto;
+    top: 1vh;
+    height: 75vh;
+    width: 50vw;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+
+    .item{
+        margin: 2rem 0px 2rem 0px;
+        display: flex;
+        align-items: center;
+    }
+    .item-2{
+        margin: 2rem 0px 2rem 0px;
+        text-align: left;
+    }
+    ion-item{
+        width: 25vw;
+    }
+    .mapa{
+        margin-top: 4rem;
+    }
+    ion-button{
+        width: 100px;
+    }
+}
+ion-footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .img{
+        width: 68px;
+        margin-left: 4rem;
+    }
+    .img2{
+        margin-left: 80rem;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .inicio{
+        top: 0vh;
+        width: 100vw;
+        .mapa{
+            margin-top: 1rem;
+        }
+        ion-item{
+            width: 60vw;
+        }
+        .item{
+            margin: 1rem 0px 1rem 0px;
+            display: flex;
+            align-items: center;
+        }
+        .item-2{
+            margin: 1rem 0px 1rem 0px;
+            text-align: left;
+        }
+        ion-button{
+            width: 75px;
+            font-size: 13px;
+        }
+    }
+    ion-footer{
+        .img{
+            width: 65px;
+            margin-left: 2rem;
+        }
+        .img2{
+            margin-left: 5rem;
+        }
+    }
+  }

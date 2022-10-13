@@ -1,0 +1,60 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+.fondo {
+  height: 100vh;
+  background-image: url("../../..//assets/img/fondo_duoc.jpg");
+  background-size: cover;
+  text-align: center;
+  
+}
+
+ion-card {
+  --background: linear-gradient(#ffffff, #091b30);
+  margin: 0 auto;
+  top: 10vh;
+  height: 80vh;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px ;
+  .imagen_auto {
+      width: 80%;
+  }
+   
+}
+@media (max-width: 400px) {
+  .fondo {
+      ion-card {
+          width: 80vw;
+          top: 10vh
+      }
+  }
+}

@@ -1,0 +1,23 @@
+<ion-content>
+  <div class="fondo">
+    <ion-card>
+    <img src="../../../assets/img/auto.png" alt="imagen_auto" class="imagen_auto"/>
+    <img src="../../../assets/img/logo.png" alt="imagen_logo" class="imagen_logo"/>
+    <ion-card-header>
+      <ion-card-title>Inicio de Sesión</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item >
+        <ion-label position="floating" color="dark">Ingrese Correo</ion-label>
+        <ion-input type="text"  [(ngModel)]="correo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password" ></ion-input>
+      </ion-item>
+      <ion-button color="warning" size="default" (click)="login()" color="secondary">Iniciar</ion-button>
+    </ion-card-content>
+    <ion-button color="medium" size="small" routerLink="/registro" color="medium">Ir a Registro...</ion-button>
+  </ion-card>
+</div>
+</ion-content>

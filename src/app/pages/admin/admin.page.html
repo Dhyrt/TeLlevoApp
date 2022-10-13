@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title><img src="../../../assets/img/logo.png" alt="" class="logo"></ion-title>
+    <ion-button slot="end" routerLink="/home">
+    <ion-icon name="log-in-outline"></ion-icon>
+    </ion-button>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="fondo">
+    <div class="titulo">
+      <h1><strong>Administración</strong></h1>
+    </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Registro</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="usuario" (ngSubmit)="registrar()">
+        <ion-item>
+          <ion-label position="stacked">Run</ion-label>
+          <ion-input type="text" placeholder="Ingrese Run" formControlName="run"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input type="text" placeholder="Ingrese su Nombre" formControlName="nombre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Apellido</ion-label>
+          <ion-input type="text" placeholder="Ingrese su Apellido" formControlName="apellido"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Correo</ion-label>
+          <ion-input type="text" placeholder="Ingrese Correo institucional" formControlName="correo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input type="password" placeholder="Ingrese contraseña" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Confirmación contraseña</ion-label>
+          <ion-input type="password" placeholder="Ingrese contraseña nuevamente" [(ngModel)]="verificar_password" [ngModelOptions]="{standalone: 'true'}"></ion-input>
+        </ion-item>
+        <ion-radio-group formControlName="tipo_usuario">
+          <ion-item>
+            <ion-label>Conductor</ion-label>
+            <ion-radio color="tertiary" slot="start" value="conductor"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Pasajero</ion-label>
+            <ion-radio color="tertiary" slot="start" value="pasajero"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Administrador</ion-label>
+            <ion-radio color="tertiary" slot="start" value="administrador"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <ion-button color="secondary" type="submit" [disabled]="!usuario.valid">Registrar</ion-button> 
+        <ion-button color="medium" (click)="modificar()">Actualizar</ion-button>
+        <ion-button color="success"(click)="limpiar()">Limpiar</ion-button> 
+      </form>
+      <div style="margin: 15px 0px 0px 15px;">
+        <h2>Usuarios</h2>
+      </div>
+      <ion-list *ngFor="let us of usuarios">
+        <p>{{us.run}} - {{us.nombre}} - {{us.apellido}} - {{us.correo}} - {{us.password}} - {{us.tipo_usuario}}</p>
+        <div class="botones">
+          <ion-button color="tertiary" (click)="buscar(us.run)">Traer</ion-button>
+          <ion-button color="danger" (click)="eliminar(us.run)">Eliminar</ion-button>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+</ion-content>

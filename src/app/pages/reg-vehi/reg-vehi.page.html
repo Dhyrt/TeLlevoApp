@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title><img src="../../../assets/img/logo.png" alt="" class="logo"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="fondo">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Registro Conductor</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="vehiculo" (ngSubmit)="registrar()">
+          <ion-item>
+            <ion-label position="stacked">Marca</ion-label>
+            <ion-input type="text" placeholder="Ingrese Marca" formControlName="marca"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Modelo</ion-label>
+            <ion-input type="text" placeholder="Ingrese Modelo" formControlName="modelo"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Patente</ion-label>
+            <ion-input type="text" placeholder="Ej: AA-AA-11" formControlName="patente"></ion-input>
+          </ion-item>
+          <ion-list>
+            <ion-item>
+              <ion-select interface="popover" placeholder="Seleccione Año" formControlName="anio">
+                <ion-select-option value="2016">2016</ion-select-option>
+                <ion-select-option value="2017">2017</ion-select-option>
+                <ion-select-option value="2018">2018</ion-select-option>
+                <ion-select-option value="2019">2019</ion-select-option>
+                <ion-select-option value="2020">2020</ion-select-option>
+                <ion-select-option value="2021">2021</ion-select-option>
+                <ion-select-option value="2022">2022</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+            <ion-list>
+              <ion-item>
+                <ion-select interface="popover" placeholder="Seleccione color" formControlName="color">
+                  <ion-select-option value="rojo">Rojo</ion-select-option>
+                  <ion-select-option value="azul">Azul</ion-select-option>
+                  <ion-select-option value="amarillo">Amarillo</ion-select-option>
+                  <ion-select-option value="blanco">Blanco</ion-select-option>
+                  <ion-select-option value="negro">Negro</ion-select-option>
+                  <ion-select-option value="gris">Gris</ion-select-option>
+                  <ion-select-option value="verde">Verde</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          <ion-item>
+            <ion-label position="stacked">Número de licencia</ion-label>
+            <ion-input type="number" placeholder="Ej: 12345678"formControlName="licencia"></ion-input>
+          </ion-item>
+          <ion-button type="submit" [disabled]="!vehiculo.valid" color="secondary">REGISTRAR</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

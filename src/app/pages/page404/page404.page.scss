@@ -1,0 +1,44 @@
+.fondo{
+    margin: 0;
+    padding: 0;
+    background-image: url(../../../assets/img/desierto3.jpg);
+    background-position: left;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    .texto{
+        text-align: center;
+        position: absolute;
+        top: 6%;
+        width: 100%;
+        padding: 0px;
+        color: black;
+        font-family: monospace;
+        h1{
+            font-size: 150px;
+        }
+        p{
+            font-size: 30px;
+        }
+    }
+    .auto{
+        width: 25rem;
+        position: absolute;
+        bottom: 13%;
+        left: 23%;
+    }
+    .persona{
+        width: 65px;
+        position: absolute;
+        bottom: 15%;
+        left: 48%;
+    }
+    .q_mark{
+        width: 63px;
+        position: absolute;
+        bottom: 38%;
+        left: 48.3%;
+    }
+}
+
+
