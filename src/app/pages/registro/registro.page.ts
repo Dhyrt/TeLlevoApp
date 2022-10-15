@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { ValidService } from 'src/app/services/valid.service';
 
 @Component({
   selector: 'app-registro',
@@ -16,6 +17,7 @@ export class RegistroPage implements OnInit {
                                   Validators.minLength(3)]),
     apellido: new FormControl('', [Validators.required, 
                                     Validators.minLength(4)]),
+    fNac: new FormControl('',[Validators.required]),
     correo: new FormControl('', [Validators.required, Validators.pattern('[A-Za-z]{2,10}.[A-Za-z]{2,20}@duocuc.cl$|[A-Za-z]{2,10}.[A-Za-z]{2,20}@profesor.duoc.cl$')]),
     password: new FormControl('', [Validators.required, 
                                    Validators.minLength(6), 
@@ -26,13 +28,24 @@ export class RegistroPage implements OnInit {
   verificar_password: string;
   usuarios: any[] = [];
 
-  constructor(private usuarioService: UsuariosService, private router: Router) { }
+  constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService) { }
 
   ngOnInit() {
     this.usuarios = this.usuarioService.obtenerUsuarios()
   }
 
   registrar(){
+    //Validacion run
+    if(!this.validoService.validRun(this.usuario.controls.run.value)){
+      alert("Rut invalido");
+      return;
+    }
+    //Validacion edad
+    if(!this.validoService.validEdad(17, this.usuario.controls.fNac.value)){
+      alert("Debe ser mayor de 17 para registrarse");
+      return;
+    }
+    //Validacion contraseña
     if (this.usuario.controls.password.value != this.verificar_password) {
       alert('contraseñas no coinciden');
       return;

@@ -25,6 +25,10 @@
             <ion-input type="text" placeholder="Ingrese su Apellido" formControlName="apellido"></ion-input>
           </ion-item>
           <ion-item>
+            <ion-label position="stacked">Fecha de nacimiento</ion-label>
+            <ion-input type="date" placeholder="Ingrese su Fecha de nacimiento" formControlName="fNac"></ion-input>
+          </ion-item>
+          <ion-item>
             <ion-label position="stacked">Correo</ion-label>
             <ion-input type="text" placeholder="Ingrese Correo institucional" formControlName="correo"></ion-input>
           </ion-item>
@@ -45,6 +49,7 @@
               <ion-label>Soy Pasajero</ion-label>
               <ion-radio color="tertiary" slot="start" value="pasajero"></ion-radio>
             </ion-item>
+            
           </ion-radio-group>
           <ion-button color="secondary" type="submit" [disabled]="!usuario.valid">registrar</ion-button>  
         </form>
