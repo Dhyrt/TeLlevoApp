@@ -71,6 +71,7 @@ export class StorageService {
     inicio:{ lat: 0, lng: 0 },
     destino:{ lat: 0, lng: 0 },
     valor:'',
+    capacidad: 4 ,
     pasRuns:[]
   }
 
