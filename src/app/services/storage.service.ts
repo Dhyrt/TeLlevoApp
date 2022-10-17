@@ -65,6 +65,16 @@ export class StorageService {
     }
 
   ];
+  viaje: any [] =[{
+    idViaje: '',
+    runCond:'',
+    inicio:{ lat: 0, lng: 0 },
+    destino:{ lat: 0, lng: 0 },
+    valor:'',
+    pasRuns:[]
+  }]
+
+
 
   constructor(private storage: Storage) { 
     storage.create(); 
