@@ -31,9 +31,14 @@
     ion-item{
         width: 25vw;
     }
-    .mapa{
-        margin-top: 4rem;
+    .map{
+        width: 50vw;
+        height: 100vh;
+        left: 80%;
+        padding: 20px;
+        
     }
+    
     ion-button{
         width: 100px;
     }
@@ -56,9 +61,25 @@ ion-footer{
     .inicio{
         top: 0vh;
         width: 100vw;
-        .mapa{
-            margin-top: 1rem;
+        
+        .map{
+            width: 100vw;
+            height: 90vh;
+            left: 80%;
+            #mapa{
+                width: 80%;
+                height: 50%;
+                display: 100%;
+            }
+            #ordenes{
+                width: 100%;
+                height: 30%;
+                padding: 15px;
+                overflow-y: auto;
+                display: block;
+            }
         }
+        
         ion-item{
             width: 60vw;
         }
@@ -86,3 +107,17 @@ ion-footer{
         }
     }
   }
+
+  #mapa{
+    width: 100%;
+    height: 70%;
+    display: 100%;
+    border-radius: 1%;
+}
+#ordenes{
+    width: 100%;
+    height: 30%;
+    padding: 15px;
+    overflow-y: auto;
+    display: block;
+}
