@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 declare var google;
 
@@ -16,7 +17,9 @@ export class InicioPage implements OnInit {
 
   ubicacionActual = { lat: 0, lng: 0 }
 
-  constructor() { }
+  usuario: any;
+
+  constructor(private router: Router) { }
 
   async ngOnInit() {
     var ubi = await this.getMiPosicion();
@@ -24,6 +27,7 @@ export class InicioPage implements OnInit {
     this.ubicacionActual.lng = ubi.coords.longitude;
     this.traerMapa();
     this.encontarUbicacion(this.mapa, this.marcador);
+    this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
   }
   traerMapa() {
     var map: HTMLElement = document.getElementById('mapa');

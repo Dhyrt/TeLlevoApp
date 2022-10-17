@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
 import { Storage } from '@ionic/storage-angular';
-import { info } from 'console';
+//import { info } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -118,6 +118,10 @@ export class StorageService {
     var index = this.usuarios.findIndex(value => value.run == info.run);
     this.usuarios[index]= info;
     await this.storage.set(key, this.usuarios);
+  }
+  //Login
+  validarLogin(correo, password){
+    return this.usuarios.find(usu => usu.correo == correo && usu.password == password);
   }
 
 }

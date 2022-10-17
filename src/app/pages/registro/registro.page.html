@@ -61,6 +61,10 @@
                   <ion-input type="text" placeholder="Ingrese Modelo" formControlName="modelo"></ion-input>
                 </ion-item>
                 <ion-item>
+                  <ion-label position="stacked">Capacidad</ion-label>
+                  <ion-input type="text" placeholder="Ingrese capacidad máx. de personas" formControlName="capac"></ion-input>
+                </ion-item>
+                <ion-item>
                   <ion-label position="stacked">Patente</ion-label>
                   <ion-input type="text" placeholder="Ej: AA-AA-11" formControlName="patente"></ion-input>
                 </ion-item>
@@ -94,7 +98,6 @@
                   <ion-label position="stacked">Número de licencia</ion-label>
                   <ion-input type="number" placeholder="Ej: 12345678"formControlName="licencia"></ion-input>
                 </ion-item>
-                <ion-button type="submit" [disabled]="!vehiculo.valid" color="secondary">REGISTRAR</ion-button>
             </div>
           <ion-button color="secondary" type="submit" [disabled]="!usuario.valid">registrar</ion-button>  
         </form>

@@ -23,14 +23,15 @@ export class RegistroPage implements OnInit {
                                    Validators.minLength(6), 
                                    Validators.maxLength(18)]),
     tipo_usuario: new FormControl('', Validators.required),
-  });
-  vehiculo = new FormGroup({
-    marca: new FormControl ('',[Validators.required, Validators.minLength(2)]),
-    modelo: new FormControl ('',[Validators.required, Validators.minLength(2)]),
-    patente: new FormControl ('',[Validators.required,Validators.pattern('[A-Z]{2}-[A-Z]{2}-[0-9]{2}')]),
-    anio: new FormControl ('',[Validators.required]),
-    color: new FormControl('',[Validators.required]),
-    licencia: new FormControl ('',[Validators.required,Validators.min(11111111),Validators.max(99999999)])
+    vehi: new FormGroup({
+      marca: new FormControl('',[Validators.minLength(2)]),
+      modelo: new FormControl('',[Validators.minLength(2)]),
+      patente: new FormControl('',[Validators.required,Validators.pattern('[A-Z]{2}-[A-Z]{2}-[0-9]{2}')]),
+      anio: new FormControl('',),
+      color: new FormControl('',),
+      capac: new FormControl('',[Validators.min(1)]),
+      licencia: new FormControl('',[Validators.min(11111111),Validators.max(99999999)]),
+    })
   });
 
   verificar_password: string;
@@ -60,10 +61,8 @@ export class RegistroPage implements OnInit {
       return;
     }
     this.usuarioService.agregarUsuario(this.usuario.value);
-    this.usuarioService.agregarVehiculo(this.vehiculo.value);
     alert('Usuario registrado');
     this.usuario.reset();
-    this.vehiculo.reset();
     this.router.navigate(['/login']);
   }
 
