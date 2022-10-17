@@ -65,14 +65,14 @@ export class StorageService {
     }
 
   ];
-  viaje: any [] =[{
+  viaje: {
     idViaje: '',
     runCond:'',
     inicio:{ lat: 0, lng: 0 },
     destino:{ lat: 0, lng: 0 },
     valor:'',
     pasRuns:[]
-  }]
+  }
 
 
 
