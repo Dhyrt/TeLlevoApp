@@ -120,4 +120,10 @@ export class StorageService {
     await this.storage.set(key, this.usuarios);
   }
 
+  async validarLogin(key, correo, password){
+    this.usuarios = await this.storage.get(key) || [];
+    return this.usuarios.find(usu => usu.correo == correo && usu.password == password);
+  }
 }
+
+
