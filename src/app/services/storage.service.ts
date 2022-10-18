@@ -138,7 +138,7 @@ export class StorageService {
     this.router.navigate(['/login'])
   }
 
-  async validarLogin(key, correo, password){
+  async validarLogin1(key, correo, password){
     this.usuarios = await this.storage.get(key) || [];
     return this.usuarios.find(usu => usu.correo == correo && usu.password == password);
   }
