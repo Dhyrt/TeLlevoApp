@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import { LoadingController } from '@ionic/angular';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-admin',
@@ -21,24 +22,37 @@ export class AdminPage implements OnInit {
     password: new FormControl('', [Validators.required, 
                                    Validators.minLength(6), 
                                    Validators.maxLength(18)]),
-    tipo_usuario: new FormControl('', [Validators.required])
+    tipo_usuario: new FormControl('', [Validators.required]),
+    vehi: new FormGroup({
+      marca: new FormControl('',[Validators.minLength(2)]),
+      modelo: new FormControl('',[Validators.minLength(2)]),
+      patente: new FormControl('',[Validators.pattern('[A-Z]{2}-[A-Z]{2}-[0-9]{2}')]),
+      anio: new FormControl('',),
+      color: new FormControl('',),
+      capac: new FormControl('',[Validators.min(1)]),
+      licencia: new FormControl('',[Validators.min(11111111),Validators.max(99999999)]),
+    })
   });
 
   verificar_password: string;
   usuarios: any[] = [];
+  KEY_HUMANOS = 'humanos';
 
-  constructor(private usuarioService: UsuariosService, private router: Router) { }
+  constructor(private router: Router, private storage: StorageService, private loading: LoadingController) { }
 
-  ngOnInit() {
-    this.usuarios = this.usuarioService.obtenerUsuarios()
+  async ngOnInit() {
+    await this.loadInfos();
   }
-
-  registrar(){
+  
+  async loadInfos(){
+    this.usuarios = await this.storage.getInfos(this.KEY_HUMANOS);
+  }
+  async registrar(){
     if (this.usuario.controls.password.value != this.verificar_password) {
       alert('Contraseñas no coinciden');
       return;
     }
-    var registrado: boolean = this.usuarioService.agregarUsuario(this.usuario.value);
+    var registrado: boolean = await this.storage.agregar(this.KEY_HUMANOS,this.usuario.value);
     if (registrado) {
       this.usuario.reset();
       alert('Usuario Registrado');
@@ -49,18 +63,20 @@ export class AdminPage implements OnInit {
     }
   }
   
-  eliminar(rutEliminar){
-    this.usuarioService.eliminarUsuario(rutEliminar);
+  async eliminar(rutEliminar){
+    await this.storage.eliminar(this.KEY_HUMANOS,rutEliminar);
+    await this.loadInfos();
   }
 
-  buscar(rutBuscar){
-    var usuarioEncontrado = this.usuarioService.obtenerUsuario(rutBuscar);
+  async buscar(rutBuscar){
+    var usuarioEncontrado = await this.storage.getInfo(this.KEY_HUMANOS,rutBuscar);
     this.usuario.setValue(usuarioEncontrado);
     this.verificar_password = usuarioEncontrado.password;
   }
 
-  modificar(){
-    this.usuarioService.actualizarUsuario(this.usuario.value);
+  async modificar(){
+    await this.storage.actualizar (this.KEY_HUMANOS, this.usuario.value);
+    await this.loadInfos();
     this.limpiar();
   }
 

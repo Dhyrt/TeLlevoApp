@@ -62,7 +62,7 @@ export class UsuariosService {
   }
 
   //Metodos Vehiculo
-/*  agregarVehiculo(vehiculo): boolean{
+ agregarVehiculo(vehiculo): boolean{
     if ( this.obtenerVehiculo(vehiculo.patente) == undefined ) {
       this.vehiculos.push(vehiculo);
       return true;
@@ -85,7 +85,7 @@ export class UsuariosService {
   }
   obtenerVehiculos(){
     return this.vehiculos;
-  }*/
+  }
 
   //Login
   validarLogin(correo, password){

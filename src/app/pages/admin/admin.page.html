@@ -43,7 +43,7 @@
           <ion-label position="stacked">Confirmación contraseña</ion-label>
           <ion-input type="password" placeholder="Ingrese contraseña nuevamente" [(ngModel)]="verificar_password" [ngModelOptions]="{standalone: 'true'}"></ion-input>
         </ion-item>
-        <ion-radio-group formControlName="tipo_usuario">
+        <ion-radio-group formControlName="tipo_usuario" [(ngModel)]="tipo_usuario">
           <ion-item>
             <ion-label>Conductor</ion-label>
             <ion-radio color="tertiary" slot="start" value="conductor"></ion-radio>
@@ -56,6 +56,56 @@
             <ion-label>Administrador</ion-label>
             <ion-radio color="tertiary" slot="start" value="administrador"></ion-radio>
           </ion-item>
+        
+          <div *ngIf="tipo_usuario == 'conductor'">
+            <h2>Registro vehiculo</h2>
+                <ion-item>
+                  <ion-label position="stacked">Marca</ion-label>
+                  <ion-input type="text" placeholder="Ingrese Marca" formControlName="marca"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Modelo</ion-label>
+                  <ion-input type="text" placeholder="Ingrese Modelo" formControlName="modelo"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Capacidad</ion-label>
+                  <ion-input type="text" placeholder="Ingrese capacidad máx. de personas" formControlName="capac"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Patente</ion-label>
+                  <ion-input type="text" placeholder="Ej: AA-AA-11" formControlName="patente"></ion-input>
+                </ion-item>
+                <ion-list>
+                  <ion-item>
+                    <ion-select interface="popover" placeholder="Seleccione Año" formControlName="anio">
+                      <ion-select-option value="2016">2016</ion-select-option>
+                      <ion-select-option value="2017">2017</ion-select-option>
+                      <ion-select-option value="2018">2018</ion-select-option>
+                      <ion-select-option value="2019">2019</ion-select-option>
+                      <ion-select-option value="2020">2020</ion-select-option>
+                      <ion-select-option value="2021">2021</ion-select-option>
+                      <ion-select-option value="2022">2022</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-list>
+                  <ion-list>
+                    <ion-item>
+                      <ion-select interface="popover" placeholder="Seleccione color" formControlName="color">
+                        <ion-select-option value="rojo">Rojo</ion-select-option>
+                        <ion-select-option value="azul">Azul</ion-select-option>
+                        <ion-select-option value="amarillo">Amarillo</ion-select-option>
+                        <ion-select-option value="blanco">Blanco</ion-select-option>
+                        <ion-select-option value="negro">Negro</ion-select-option>
+                        <ion-select-option value="gris">Gris</ion-select-option>
+                        <ion-select-option value="verde">Verde</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-list>
+                <ion-item>
+                  <ion-label position="stacked">Número de licencia</ion-label>
+                  <ion-input type="number" placeholder="Ej: 12345678"formControlName="licencia"></ion-input>
+                </ion-item>
+            </div>
         </ion-radio-group>
         <ion-button color="secondary" type="submit" [disabled]="!usuario.valid">Registrar</ion-button> 
         <ion-button color="medium" (click)="modificar()">Actualizar</ion-button>

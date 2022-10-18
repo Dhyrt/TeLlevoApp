@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class InicioCPage implements OnInit {
 
   usuario: any;
-
+  
   constructor(private router: Router) { }
 
   ngOnInit() {
