@@ -26,7 +26,7 @@ export class RegistroPage implements OnInit {
     vehi: new FormGroup({
       marca: new FormControl('',[Validators.minLength(2)]),
       modelo: new FormControl('',[Validators.minLength(2)]),
-      patente: new FormControl('',[Validators.required,Validators.pattern('[A-Z]{2}-[A-Z]{2}-[0-9]{2}')]),
+      patente: new FormControl('',[Validators.pattern('[A-Z]{2}-[A-Z]{2}-[0-9]{2}')]),
       anio: new FormControl('',),
       color: new FormControl('',),
       capac: new FormControl('',[Validators.min(1)]),

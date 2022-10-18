@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
 import { Storage } from '@ionic/storage-angular';
+import { BehaviorSubject } from 'rxjs';
 //import { info } from 'console';
 
 @Injectable({
@@ -75,9 +77,9 @@ export class StorageService {
     pasRuns:[]
   }
 
+  isAuthenticated = new BehaviorSubject(false);
 
-
-  constructor(private storage: Storage) { 
+  constructor(private storage: Storage, private router: Router) { 
     storage.create(); 
   }
 
@@ -121,7 +123,19 @@ export class StorageService {
   }
   //Login
   validarLogin(correo, password){
-    return this.usuarios.find(usu => usu.correo == correo && usu.password == password);
+    var usuarioLogin = this.usuarios.find(usu => usu.correo == correo && usu.password == password);
+    if(usuarioLogin != undefined){
+      this.isAuthenticated.next(true);
+      return usuarioLogin;
+    }
+    //return this.usuarios.find(usu => usu.correo == correo && usu.password == password);
+  }
+  getAuth(){
+    return this.isAuthenticated.value;
+  }
+  logout(){
+    this.isAuthenticated.next(false);
+    this.router.navigate(['/login'])
   }
 
 }
