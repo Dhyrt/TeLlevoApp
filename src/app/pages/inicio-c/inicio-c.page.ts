@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio-c',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioCPage implements OnInit {
 
-  constructor() { }
+  usuario: any;
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
   }
 
 }

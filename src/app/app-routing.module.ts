@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -33,23 +34,28 @@ const routes: Routes = [
   },
   {
     path: 'c-auto',
-    loadChildren: () => import('./pages/c-auto/c-auto.module').then( m => m.CAutoPageModule)
+    loadChildren: () => import('./pages/c-auto/c-auto.module').then( m => m.CAutoPageModule),
+    //canActivate: [AuthGuard]
   },
   {
     path: 'confg',
-    loadChildren: () => import('./pages/confg/confg.module').then( m => m.ConfgPageModule)
+    loadChildren: () => import('./pages/confg/confg.module').then( m => m.ConfgPageModule),
+    //canActivate: [AuthGuard]
   },
   {
     path: 'confg-c',
-    loadChildren: () => import('./pages/confg-c/confg-c.module').then( m => m.ConfgCPageModule)
+    loadChildren: () => import('./pages/confg-c/confg-c.module').then( m => m.ConfgCPageModule),
+    //canActivate: [AuthGuard]
   },
   {
     path: 'confg-a',
-    loadChildren: () => import('./pages/confg-a/confg-a.module').then( m => m.ConfgAPageModule)
+    loadChildren: () => import('./pages/confg-a/confg-a.module').then( m => m.ConfgAPageModule),
+    //canActivate: [AuthGuard]
   },
   {
     path: 'admin',
-    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
+    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule),
+    //canActivate: [AuthGuard]
   },
   {
     path: 'inicio',

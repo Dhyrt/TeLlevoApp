@@ -22,11 +22,21 @@ export class RegistroPage implements OnInit {
     password: new FormControl('', [Validators.required, 
                                    Validators.minLength(6), 
                                    Validators.maxLength(18)]),
-    tipo_usuario: new FormControl('', Validators.required)
+    tipo_usuario: new FormControl('', Validators.required),
+    vehi: new FormGroup({
+      marca: new FormControl('',[Validators.minLength(2)]),
+      modelo: new FormControl('',[Validators.minLength(2)]),
+      patente: new FormControl('',[Validators.pattern('[A-Z]{2}-[A-Z]{2}-[0-9]{2}')]),
+      anio: new FormControl('',),
+      color: new FormControl('',),
+      capac: new FormControl('',[Validators.min(1)]),
+      licencia: new FormControl('',[Validators.min(11111111),Validators.max(99999999)]),
+    })
   });
 
   verificar_password: string;
   usuarios: any[] = [];
+  autos: any[] = [];
 
   constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService) { }
 
@@ -52,11 +62,8 @@ export class RegistroPage implements OnInit {
     }
     this.usuarioService.agregarUsuario(this.usuario.value);
     alert('Usuario registrado');
-    if (this.usuario.controls.tipo_usuario.value == "conductor"){
-      this.router.navigate(['/reg-vehi']);
-    }else{
-      this.router.navigate(['/login']);
-    }
+    this.usuario.reset();
+    this.router.navigate(['/login']);
   }
 
 }
