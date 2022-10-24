@@ -67,15 +67,7 @@ export class StorageService {
     }
 
   ];
-  viaje: {
-    idViaje: '',
-    runCond:'',
-    inicio:{ lat: 0, lng: 0 },
-    destino:{ lat: 0, lng: 0 },
-    valor:'',
-    capacidad: 4 ,
-    pasRuns:[]
-  }
+  viajes:  any[] = []
 
   isAuthenticated = new BehaviorSubject(false);
 
@@ -94,14 +86,36 @@ export class StorageService {
     return false;
   }
 
+  async agViaje(key, viaje){
+    this.viajes = await this.storage.get(key) || [];
+
+    if(viaje.id == ''){
+      var id = this.viajes.length + 1;
+      viaje.id = id;
+      this.viajes.push(viaje);
+      await this.storage.set(key, this.viajes);
+      return true;
+    }
+    return false;
+  }
+
   async getInfo(key, run){
     this.usuarios = await this.storage.get(key) || [];
     return this.usuarios.find(info => info.run == run);
+  }
+  async getInfov(key, id){
+    this.viajes = await this.storage.get(key) || [];
+    return this.viajes.find(viaje => viaje.id == id);
   }
 
   async getInfos(key){
     this.usuarios = await this.storage.get(key) || [];
     return this.usuarios;
+  }
+  
+  async getInfosV(key){
+    this.viajes = await this.storage.get(key) || [];
+    return this.viajes;
   }
 
   async eliminar (key, run){

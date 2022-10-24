@@ -3,6 +3,8 @@
     <ion-title>map</ion-title>
     <input type="text" id="autocompletar">
     <ion-button (click)="calculoRuta()" color="medium">Ir</ion-button>
+    <ion-input [(ngModel)]="viaje.valor" type="text" placeholder="ingrese valor viaje "></ion-input>
+    <ion-button (click)="crearViaje()" color="medium">Crear Viaje</ion-button>
   </ion-toolbar>
 </ion-header>
 
