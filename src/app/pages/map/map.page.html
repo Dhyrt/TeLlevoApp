@@ -1,14 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>map</ion-title>
+    <ion-title>Conductor</ion-title>
     <input type="text" id="autocompletar">
     <ion-button (click)="calculoRuta()" color="medium">Ir</ion-button>
-    <ion-input [(ngModel)]="viaje.valor" type="text" placeholder="ingrese valor viaje "></ion-input>
-    <ion-button (click)="crearViaje()" color="medium">Crear Viaje</ion-button>
   </ion-toolbar>
 </ion-header>
-
+<ion-item>
+  <ion-label position="fixed">Valor viaje</ion-label>
+  <ion-input [(ngModel)]="viaje.valor" type="text" placeholder="Ingrese valor "></ion-input>
+  <ion-button (click)="crearViaje()" color="medium">Crear Viaje</ion-button>
+</ion-item>
 <ion-content>
+
   <div id="mapa"></div>
   <div id="ordenes"></div>
 </ion-content>
