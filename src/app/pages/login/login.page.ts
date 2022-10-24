@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
       }else if(usuarioLogin.tipo_usuario == 'pasajero'){
         this.router.navigate(['/inicio'], navigationExtras);
       }else if(usuarioLogin.tipo_usuario == 'conductor'){
-        this.router.navigate(['/inicio-c'], navigationExtras);
+        this.router.navigate(['/map'], navigationExtras);
       }
     }else{
       this.toastError('bottom','Usuario o contraseña Incorrectos!!!');
