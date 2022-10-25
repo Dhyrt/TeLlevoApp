@@ -380,5 +380,8 @@ export class MapPage implements OnInit {
         }
     );
   }
+  async salir() {
+    await this.storage.logout();
+    }
 
 }

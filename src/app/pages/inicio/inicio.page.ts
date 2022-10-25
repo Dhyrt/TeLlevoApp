@@ -65,8 +65,8 @@ export class InicioPage implements OnInit {
         alert('Viaje Tomado');
     }
 
-    traerMapa() {
-        var map: HTMLElement = document.getElementById('mapa');
+  traerMapa() {
+    var map: HTMLElement = document.getElementById('mapa');
 
         this.mapa = new google.maps.Map(map, {
             styles: [
@@ -408,7 +408,6 @@ export class InicioPage implements OnInit {
             }
         );
     }
-
     async salir() {
         await this.storage.logout();
     }
