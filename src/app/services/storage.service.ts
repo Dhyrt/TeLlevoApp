@@ -99,6 +99,13 @@ export class StorageService {
     return false;
   }
 
+  async agPasajero (key, viaje){
+    this.viajes = await this.storage.get(key) ||[];
+    var index = this.viajes.findIndex(value => value.id == viaje.id);
+    this.viajes[index] = viaje;
+    await this.storage.set(key, this.viajes);
+  }
+
   async getInfo(key, run){
     this.usuarios = await this.storage.get(key) || [];
     return this.usuarios.find(info => info.run == run);

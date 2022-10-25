@@ -50,13 +50,11 @@ export class InicioPage implements OnInit {
     this.viajes = await this.storage.getInfosV(this.KEY_VIAJES);
   }
 
-  async tomarViaje(){
-    this.viaje.pasRuns = [this.rut];
-    var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
-    if(res){
-      alert('Viaje Tomado');
-      await this.loadViajes();
-    }
+  async tomarViaje(viaje){
+    this.viaje.pasRuns = this.rut;
+    await this.storage.agPasajero(this.KEY_VIAJES, this.viaje.pasRuns);
+    alert('Viaje Tomado');
+    await this.loadViajes();
   }
 
   traerMapa() {
