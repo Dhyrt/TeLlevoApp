@@ -413,5 +413,8 @@ export class InicioCPage implements OnInit {
         }
     );
   }
+  async salir() {
+    await this.storage.logout();
+    }
 
 }
