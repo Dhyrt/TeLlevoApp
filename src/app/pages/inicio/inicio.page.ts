@@ -50,13 +50,6 @@ export class InicioPage implements OnInit {
     this.viajes = await this.storage.getInfosV(this.KEY_VIAJES);
   }
 
-  async tomarViaje(viaje){
-    this.viaje.pasRuns = this.rut;
-    await this.storage.agPasajero(this.KEY_VIAJES, this.viaje.pasRuns);
-    alert('Viaje Tomado');
-    await this.loadViajes();
-  }
-
   traerMapa() {
     var map: HTMLElement = document.getElementById('mapa');
 
@@ -400,7 +393,6 @@ export class InicioPage implements OnInit {
         }
     );
   }
-
   async salir() {
     await this.storage.logout();
     }
