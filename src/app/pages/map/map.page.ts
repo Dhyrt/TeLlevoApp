@@ -52,7 +52,7 @@ export class MapPage implements OnInit {
     this.viaje.id = '';
     this.viaje.inicio = this.ubicacionActual;
 
-    var res = await this.storage.agregar(this.KEY_VIAJES, this.viaje);
+    var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
     if(res){
       alert('Viaje Creado');
       await this.loadViajes();

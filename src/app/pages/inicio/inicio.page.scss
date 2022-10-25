@@ -18,11 +18,19 @@
     justify-content: center;
     text-align: center;
     padding: 20px;
-
+    .inputLabel{
+        display: none;
+    }
     .item{
         margin: 2rem 0px 2rem 0px;
         display: flex;
         align-items: center;
+        input{
+            background-color: rgba(0, 0, 0, 0);
+            border: none;
+            outline: none;
+            width: 25vw;
+        }
     }
     .item-2{
         margin: 2rem 0px 2rem 0px;
@@ -33,26 +41,18 @@
     }
     .map{
         width: 50vw;
-        height: 100vh;
-        left: 80%;
-        padding: 20px;
-        
+        height: 70vh;
+        left: 80%; 
     }
-    
     ion-button{
         width: 100px;
     }
 }
 ion-footer{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    .img{
-        width: 68px;
-        margin-left: 4rem;
-    }
-    .img2{
-        margin-left: 80rem;
+    width: 100vw;
+    text-align: center;
+    ion-icon{
+        font-size: 35px;
     }
 }
 
@@ -61,14 +61,22 @@ ion-footer{
     .inicio{
         top: 0vh;
         width: 100vw;
-        
+        .inputLabel{
+            display: contents;
+            width: 100vw;
+            text-align: left;
+            padding-bottom: 0px;
+            p{
+                font-size: 14px;
+                margin-bottom: 0px;
+            }
+        }
         .map{
             width: 100vw;
-            height: 90vh;
-            left: 80%;
+            height: 30vh;
             #mapa{
-                width: 80%;
-                height: 50%;
+                width: 85%;
+                height: 100%;
                 display: 100%;
             }
             #ordenes{
@@ -81,36 +89,42 @@ ion-footer{
         }
         
         ion-item{
-            width: 60vw;
+            width: 85vw;
+            height: 5vh;
+            margin-top: 0%;
+            padding-top: 3px;
         }
         .item{
-            margin: 1rem 0px 1rem 0px;
+            margin: 0.5px 0px 1px 0px;
             display: flex;
-            align-items: center;
+            text-align: left;
+            input{
+                width: 60vw;
+                font-size: 14px;
+            }
+            input::placeholder{
+                color: transparent;
+            }
         }
         .item-2{
             margin: 1rem 0px 1rem 0px;
             text-align: left;
         }
         ion-button{
-            width: 75px;
-            font-size: 13px;
+            width: 23vw;
+            font-size: 12px;
         }
-    }
-    ion-footer{
-        .img{
-            width: 65px;
-            margin-left: 2rem;
-        }
-        .img2{
-            margin-left: 5rem;
+        ion-footer{
+            ion-icon{
+                font-size: 29px;
+            }
         }
     }
   }
 
-  #mapa{
+#mapa{
     width: 100%;
-    height: 70%;
+    height: 90%;
     display: 100%;
     border-radius: 1%;
 }

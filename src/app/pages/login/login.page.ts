@@ -14,13 +14,13 @@ export class LoginPage implements OnInit {
   correo: string;
   password: string;
 
-  constructor(private toastController: ToastController, private router: Router, private storage: StorageService) { }
+  constructor(private toastController: ToastController, private router: Router, private storageService: StorageService) { }
 
   ngOnInit() {
   }
 
   login(){
-    var usuarioLogin = this.storage.validarLogin(this.correo, this.password);
+    var usuarioLogin = this.storageService.validarLogin(this.correo, this.password);
     if ( usuarioLogin != undefined ) {
       var navigationExtras: NavigationExtras = {
         state: {
@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
       }else if(usuarioLogin.tipo_usuario == 'pasajero'){
         this.router.navigate(['/inicio'], navigationExtras);
       }else if(usuarioLogin.tipo_usuario == 'conductor'){
-        this.router.navigate(['/map'], navigationExtras);
+        this.router.navigate(['/inicio-c'], navigationExtras);
       }
     }else{
       this.toastError('bottom','Usuario o contraseña Incorrectos!!!');

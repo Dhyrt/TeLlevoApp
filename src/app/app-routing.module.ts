@@ -33,11 +33,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/p-auto/p-auto.module').then( m => m.PAutoPageModule)
   },
   {
-    path: 'c-auto',
-    loadChildren: () => import('./pages/c-auto/c-auto.module').then( m => m.CAutoPageModule),
-    //canActivate: [AuthGuard]
-  },
-  {
     path: 'confg',
     loadChildren: () => import('./pages/confg/confg.module').then( m => m.ConfgPageModule),
     //canActivate: [AuthGuard]
@@ -73,6 +68,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/page404/page404.module').then( m => m.Page404PageModule)
   },
+
 
 ];
 

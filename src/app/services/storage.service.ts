@@ -77,7 +77,7 @@ export class StorageService {
 
   async agregar(key, info){
     this.usuarios = await this.storage.get(key) || [];
-    var infor =await this.getInfo(key, info.rut);
+    var infor =await this.getInfo(key, info.run);
     if (infor == undefined) {
       this.usuarios.push(info);
       await this.storage.set(key, this.usuarios);

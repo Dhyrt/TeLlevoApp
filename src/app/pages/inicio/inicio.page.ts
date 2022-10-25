@@ -22,12 +22,12 @@ export class InicioPage implements OnInit {
   constructor(private router: Router) { }
 
   async ngOnInit() {
+    this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
     var ubi = await this.getMiPosicion();
     this.ubicacionActual.lat = ubi.coords.latitude;
     this.ubicacionActual.lng = ubi.coords.longitude;
     this.traerMapa();
     this.encontarUbicacion(this.mapa, this.marcador);
-    this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
   }
   traerMapa() {
     var map: HTMLElement = document.getElementById('mapa');
