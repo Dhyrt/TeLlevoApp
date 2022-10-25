@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 
 declare var google;
 
@@ -20,7 +21,19 @@ export class InicioPage implements OnInit {
   usuario: any;
   rut: any;
 
-  constructor(private router: Router) { }
+  viajes: any[] = [];
+  KEY_VIAJES = 'viajes';
+  viaje = {
+    id: '',
+    runCond:'',
+    inicio:{ lat: 0, lng: 0 },
+    destino:{ lat: 0, lng: 0 },
+    valor:'',
+    capacidad: 4 ,
+    pasRuns:[]
+  };
+
+  constructor(private router: Router, private storage: StorageService) { }
 
   async ngOnInit() {
     this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
@@ -29,8 +42,23 @@ export class InicioPage implements OnInit {
     this.ubicacionActual.lng = ubi.coords.longitude;
     this.traerMapa();
     this.encontarUbicacion(this.mapa, this.marcador);
+    await this.loadViajes();
     this.rut = this.usuario.run;
   }
+
+  async loadViajes(){
+    this.viajes = await this.storage.getInfosV(this.KEY_VIAJES);
+  }
+
+  async tomarViaje(){
+    this.viaje.pasRuns = [this.rut];
+    var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
+    if(res){
+      alert('Viaje Tomado');
+      await this.loadViajes();
+    }
+  }
+
   traerMapa() {
     var map: HTMLElement = document.getElementById('mapa');
 

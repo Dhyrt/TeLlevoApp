@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -15,14 +15,21 @@ export class MapPage implements OnInit {
   marcador: any;
   buscar: any;
   directionsService = new google.maps.DirectionsService();
-  directionsRenderer= new google.maps.DirectionsRenderer();
+  directionsRenderer = new google.maps.DirectionsRenderer();
 
   ubicacionActual = { lat: 0, lng: 0 }
   ubicacionDuoc =  { lat:-33.597835629011804, lng:-70.57911395425506}
 
-  constructor(private router: Router, private loading: LoadingController) { }
+  rut: string;
+  usuario : any;
+  KEY_HUMANOS = 'humanos';
+
+  constructor(private router: Router, private loading: LoadingController, private activatedRoute: ActivatedRoute, private storage: StorageService) { }
 
   async ngOnInit() {
+    this.rut = this.activatedRoute.snapshot.paramMap.get('rut');
+    this.usuario = this.storage.getInfo(this.KEY_HUMANOS, this.rut);
+    console.table(this.usuario);
     var ubi = await this.getMiPosicion();
     this.ubicacionActual.lat = ubi.coords.latitude;
     this.ubicacionActual.lng = ubi.coords.longitude;
