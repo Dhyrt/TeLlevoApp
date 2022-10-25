@@ -13,6 +13,7 @@ declare var google;
 export class InicioCPage implements OnInit {
 
   usuario: any;
+  rut: any;
   //Variables mapa
   mapa: any;
   marcador: any;
@@ -35,6 +36,7 @@ export class InicioCPage implements OnInit {
     capacidad: 4 ,
     pasRuns:[]
   };
+
   
   constructor(private router: Router, private storage: StorageService) { }
 
@@ -46,7 +48,9 @@ export class InicioCPage implements OnInit {
     this.traerMapa();
     this.encontarUbicacion(this.mapa, this.marcador);
     await this.loadViajes();
+    this.rut = this.usuario.run;
   }
+
 
   async loadViajes(){
     this.viajes = await this.storage.getInfosV(this.KEY_VIAJES);
@@ -56,7 +60,7 @@ export class InicioCPage implements OnInit {
     this.viaje.id = '';
     this.viaje.inicio = this.ubicacionDuoc;
     this.viaje.destino = this.ubicacionActual;
-    this.viaje.runCond = this.usuario.run;
+    this.viaje.runCond = this.rut;
 
     var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
     if(res){

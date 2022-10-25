@@ -18,6 +18,7 @@ export class InicioPage implements OnInit {
   ubicacionActual = { lat: 0, lng: 0 }
 
   usuario: any;
+  rut: any;
 
   constructor(private router: Router) { }
 
@@ -28,6 +29,7 @@ export class InicioPage implements OnInit {
     this.ubicacionActual.lng = ubi.coords.longitude;
     this.traerMapa();
     this.encontarUbicacion(this.mapa, this.marcador);
+    this.rut = this.usuario.run;
   }
   traerMapa() {
     var map: HTMLElement = document.getElementById('mapa');

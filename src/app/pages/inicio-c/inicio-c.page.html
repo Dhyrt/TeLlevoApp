@@ -15,7 +15,7 @@
       <ion-item>
         <input type="text" id="autocompletar">
       </ion-item>
-      <ion-button (click)="calculoRuta()" fill="clear" class="ion-button2"><ion-icon name="search-circle"></ion-icon></ion-button>
+      <ion-button (click)="calculoRuta()">Buscar</ion-button>
     </div>
     <div class="inputLabel">
       <p>Valor viaje</p>
@@ -40,7 +40,7 @@
 <ion-footer>
   <ion-toolbar color="dark">
     <ion-button class="img" fill="clear" slot="start"><ion-icon name="home"></ion-icon></ion-button>
-    <ion-button class="img img2" fill="clear"><ion-icon name="navigate-circle"></ion-icon></ion-button>
+    <ion-button class="img img2" fill="clear" routerLink="/map"><ion-icon name="navigate-circle"></ion-icon></ion-button>
     <ion-button class="img img2" fill="clear" slot="end"><ion-icon name="person-circle-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-footer>
