@@ -21,8 +21,10 @@
       <ion-label position="stacked">Viajes disponibles</ion-label>
       <ion-list *ngFor="let v of viajes">
         <ion-item>
-          <p>{{v.id}}</p>
-          <p>{{v.destino_palabra}}</p>
+          <p>{{ v.id }}</p>
+          <p>{{ v.destino_palabra }}</p>
+          <p>{{ v.capacidad}}</p>
+          <p>{{ v.valor}}</p>
           <ion-button (click)="tomarViaje(v.id)">Tomar</ion-button>
         </ion-item>
       </ion-list>

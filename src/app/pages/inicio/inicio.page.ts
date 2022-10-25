@@ -28,6 +28,7 @@ export class InicioPage implements OnInit {
         runCond: '',
         inicio: { lat: 0, lng: 0 },
         destino: { lat: 0, lng: 0 },
+        destino_palabra: '',
         valor: '',
         capacidad: 4,
         pasRuns: []
@@ -52,6 +53,7 @@ export class InicioPage implements OnInit {
     }
 
     async tomarViaje(id_viaje) {
+        
         let indice = this.viajes.findIndex(v => v.id == id_viaje)
         this.viajes[indice].pasRuns.push(this.rut);
         
@@ -62,8 +64,8 @@ export class InicioPage implements OnInit {
           alert('Viaje Tomado');
           await this.loadViajes();
         } */
-        alert('Viaje Tomado');
-    }
+        alert('Viaje Tomado');}
+    
 
   traerMapa() {
     var map: HTMLElement = document.getElementById('mapa');
