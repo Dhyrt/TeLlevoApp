@@ -54,15 +54,18 @@ const routes: Routes = [
   },
   {
     path: 'inicio',
-    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
+    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule),
+    //canActivate: [AuthGuard]
   },
   {
     path: 'inicio-c',
-    loadChildren: () => import('./pages/inicio-c/inicio-c.module').then( m => m.InicioCPageModule)
+    loadChildren: () => import('./pages/inicio-c/inicio-c.module').then( m => m.InicioCPageModule),
+    //canActivate: [AuthGuard]
   },
   {
     path: 'map',
-    loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
+    loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule),
+    //canActivate: [AuthGuard]
   },
   {
     path: '**',

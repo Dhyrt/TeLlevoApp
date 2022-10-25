@@ -100,4 +100,8 @@ export class AdminPage implements OnInit {
     this.verificar_password = '';
   }
 
+  async salir() {
+    await this.storage.logout();
+  }
+
 }
