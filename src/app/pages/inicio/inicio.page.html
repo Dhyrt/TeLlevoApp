@@ -22,8 +22,8 @@
       <ion-list *ngFor="let v of viajes">
         <ion-item>
           <p>{{v.id}}</p>
-          <p>{{v.destino}}</p>
-          <ion-button (click)="tomarViaje()">Tomar</ion-button>
+          <p>{{v.destino_palabra}}</p>
+          <ion-button (click)="tomarViaje(v.id)">Tomar</ion-button>
         </ion-item>
       </ion-list>
     </div>

@@ -156,6 +156,12 @@ export class StorageService {
     this.usuarios = await this.storage.get(key) || [];
     return this.usuarios.find(usu => usu.correo == correo && usu.password == password);
   }
+
+
+  //método customer:
+  async modificarViajesExistentes(key, arregloConUnRutMas){
+    await this.storage.set(key, arregloConUnRutMas);
+  }
 }
 
 

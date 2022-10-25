@@ -41,7 +41,7 @@ export class AdminPage implements OnInit {
 
   verificar_password: string;
   usuarios: any[] = [];
-  KEY_HUMANOS = 'humanos';
+  KEY_HUMANOS = 'usuarios';
 
   constructor(private router: Router, private storage: StorageService, private loading: LoadingController) { }
 

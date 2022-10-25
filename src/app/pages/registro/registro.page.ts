@@ -38,7 +38,7 @@ export class RegistroPage implements OnInit {
   verificar_password: string;
   usuarios: any[] = [];
   autos: any[] = [];
-  KEY_HUMANOS = 'humanos';
+  KEY_HUMANOS = 'usuarios';
   constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService, private storageService: StorageService) { }
 
   ngOnInit() {
