@@ -12,27 +12,32 @@ import { StorageService } from 'src/app/services/storage.service';
 export class AdminPage implements OnInit {
 
   usuario = new FormGroup({
-    run: new FormControl('', [Validators.required, 
-                               Validators.pattern('[0-9]{1,2}.[0-9]{3}.[0-9]{3}-[0-9kK]{1}')]),
-    nombre: new FormControl('', [Validators.required, 
-                                  Validators.minLength(3)]),
-    apellido: new FormControl('', [Validators.required, 
-                                    Validators.minLength(4)]),
+    run: new FormControl('', [Validators.required,
+    Validators.pattern('[0-9]{1,2}.[0-9]{3}.[0-9]{3}-[0-9kK]{1}')]),
+    nombre: new FormControl('', [Validators.required,
+    Validators.minLength(3)]),
+    apellido: new FormControl('', [Validators.required,
+    Validators.minLength(4)]),
+    fNac: new FormControl('',[Validators.required]),
     correo: new FormControl('', [Validators.required, Validators.pattern('[A-Za-z]{2,10}.[A-Za-z]{2,20}@duocuc.cl$|[A-Za-z]{2,10}.[A-Za-z]{2,20}@profesor.duoc.cl$')]),
-    password: new FormControl('', [Validators.required, 
-                                   Validators.minLength(6), 
-                                   Validators.maxLength(18)]),
+    password: new FormControl('', [Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(18)]),
     tipo_usuario: new FormControl('', [Validators.required]),
-    vehi: new FormGroup({
-      marca: new FormControl('',[Validators.minLength(2)]),
-      modelo: new FormControl('',[Validators.minLength(2)]),
-      patente: new FormControl('',[Validators.pattern('[A-Z]{2}-[A-Z]{2}-[0-9]{2}')]),
-      anio: new FormControl('',),
-      color: new FormControl('',),
-      capac: new FormControl('',[Validators.min(1)]),
-      licencia: new FormControl('',[Validators.min(11111111),Validators.max(99999999)]),
-    })
+    vehi: new FormControl({}, [])
+      
+    
   });
+
+  vehi = {
+    marca: '',
+    modelo: '', 
+    patente: '', 
+    anio: '',
+    color: '',
+    capac: '',
+    licencia: ''
+  }
 
   verificar_password: string;
   usuarios: any[] = [];
@@ -43,44 +48,54 @@ export class AdminPage implements OnInit {
   async ngOnInit() {
     await this.loadInfos();
   }
-  
-  async loadInfos(){
+
+  async loadInfos() {
     this.usuarios = await this.storage.getInfos(this.KEY_HUMANOS);
   }
-  async registrar(){
+  async registrar() {
     if (this.usuario.controls.password.value != this.verificar_password) {
       alert('Contraseñas no coinciden');
       return;
     }
-    var registrado: boolean = await this.storage.agregar(this.KEY_HUMANOS,this.usuario.value);
+    if (this.vehi.patente == '') {
+      alert('patente esta vacia ingrese patente')
+      return;
+    }
+    if (this.vehi.licencia == '') {
+      alert('licencia esta vacia ingrese licencia')
+      return;
+    }
+    this.usuario.controls.vehi.setValue(this.vehi);
+
+    var registrado: boolean = await this.storage.agregar(this.KEY_HUMANOS, this.usuario.value);
     if (registrado) {
       this.usuario.reset();
       alert('Usuario Registrado');
       this.verificar_password = '';
-    }else{
+    } else {
       alert('Usuario Existente');
       return;
     }
   }
-  
-  async eliminar(rutEliminar){
-    await this.storage.eliminar(this.KEY_HUMANOS,rutEliminar);
+
+  async eliminar(rutEliminar) {
+    await this.storage.eliminar(this.KEY_HUMANOS, rutEliminar);
     await this.loadInfos();
   }
 
-  async buscar(rutBuscar){
-    var usuarioEncontrado = await this.storage.getInfo(this.KEY_HUMANOS,rutBuscar);
+  async buscar(rutBuscar) {
+    var usuarioEncontrado = await this.storage.getInfo(this.KEY_HUMANOS, rutBuscar);
     this.usuario.setValue(usuarioEncontrado);
     this.verificar_password = usuarioEncontrado.password;
   }
 
-  async modificar(){
-    await this.storage.actualizar (this.KEY_HUMANOS, this.usuario.value);
+  async modificar() {
+    await this.storage.actualizar(this.KEY_HUMANOS, this.usuario.value);
     await this.loadInfos();
     this.limpiar();
   }
 
-  limpiar(){
+  limpiar() {
     this.usuario.reset();
     this.verificar_password = '';
   }

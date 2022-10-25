@@ -23,7 +23,7 @@ export class MapPage implements OnInit {
 
   viajes: any[] = [];
   KEY_VIAJES = 'viajes';
-  viaje: {
+  viaje = {
     id: '',
     runCond:'',
     inicio:{ lat: 0, lng: 0 },
@@ -50,6 +50,8 @@ export class MapPage implements OnInit {
 
   async crearViaje(){
     this.viaje.id = '';
+    this.viaje.inicio = this.ubicacionActual;
+
     var res = await this.storage.agregar(this.KEY_VIAJES, this.viaje);
     if(res){
       alert('Viaje Creado');

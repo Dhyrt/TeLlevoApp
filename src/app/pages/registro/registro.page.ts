@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ValidService } from 'src/app/services/valid.service';
 
@@ -37,14 +38,14 @@ export class RegistroPage implements OnInit {
   verificar_password: string;
   usuarios: any[] = [];
   autos: any[] = [];
-
-  constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService) { }
+  KEY_HUMANOS = 'humanos';
+  constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService, private storageService: StorageService) { }
 
   ngOnInit() {
     this.usuarios = this.usuarioService.obtenerUsuarios()
   }
 
-  registrar(){
+  async registrar(){
     //Validacion run
     if(!this.validoService.validRun(this.usuario.controls.run.value)){
       alert("Rut invalido");
@@ -60,7 +61,7 @@ export class RegistroPage implements OnInit {
       alert('contraseñas no coinciden');
       return;
     }
-    this.usuarioService.agregarUsuario(this.usuario.value);
+    await this.storageService.agregar(this.KEY_HUMANOS, this.usuario.value);
     alert('Usuario registrado');
     this.usuario.reset();
     this.router.navigate(['/login']);
