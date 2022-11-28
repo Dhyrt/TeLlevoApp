@@ -1,24 +1,37 @@
-// import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-// import { IonicModule } from '@ionic/angular';
+import { TestBed } from "@angular/core/testing";
+import { AngularFireModule } from "@angular/fire/compat";
+import { environment } from "src/environments/environment";
+import { RegistroPage } from "./registro.page";
 
-// import { RegistroPage } from './registro.page';
 
-// describe('RegistroPage', () => {
-//   let component: RegistroPage;
-//   let fixture: ComponentFixture<RegistroPage>;
 
-//   beforeEach(waitForAsync(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ RegistroPage ],
-//       imports: [IonicModule.forRoot()]
-//     }).compileComponents();
+describe('Pruebas unitarias: Login', ()=>{
+  beforeEach( async()=>{
+    await TestBed.configureTestingModule( {
+      imports :[
+        
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        
 
-//     fixture = TestBed.createComponent(RegistroPage);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   }));
+        
+      ],declarations: [
+        RegistroPage
+      ]
+    }).compileComponents();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('1. Levantar la pagina Login', ()=>{
+    const fixture = TestBed.createComponent(RegistroPage);
+    const app = fixture.componentInstance;
+    
+    expect(app).toBeTruthy();
+  });
+
+
+  it('2. Registro invalido', ()=>{
+    const fixture = TestBed.createComponent(RegistroPage);
+    const app = fixture.componentInstance;
+
+    
+  })
+})

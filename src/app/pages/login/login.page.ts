@@ -16,17 +16,13 @@ export class LoginPage implements OnInit {
   correo: string;
   password: string;
   KEY_HUMANOS = 'usuarios';
-<<<<<<< HEAD
-  constructor(private toastController: ToastController, private router: Router, private fireService: FireService) { }
-=======
   usuarioLogin : any;
   
   /* usuario = {
     correo: '',
     password: '' 
   }; */
-  constructor(private toastController: ToastController, private router: Router, private storageService: StorageService, private fireService: FireService) { }
->>>>>>> 2920598cc31e1b7aca3e9d1759185a07158e41c1
+  constructor(private toastController: ToastController, private router: Router, private fireService: FireService) { }
 
   ngOnInit() {
     this.loadInfos();
