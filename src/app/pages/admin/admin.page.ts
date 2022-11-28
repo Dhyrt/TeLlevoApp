@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { ValidService } from 'src/app/services/valid.service';
 
 @Component({
   selector: 'app-admin',
@@ -45,7 +46,8 @@ export class AdminPage implements OnInit {
   KEY_HUMANOS = 'usuarios';
   registrado : boolean = false 
   id_nuevo: any = '';
-  constructor(private router: Router, private storage: StorageService, private loading: LoadingController, private fireService: FireService) { }
+  usuarioExiste : any = '';
+  constructor(private router: Router, private storage: StorageService, private loading: LoadingController, private fireService: FireService, private validoService: ValidService ) { }
 
   ngOnInit() {
     //await this.loadInfos();
@@ -67,21 +69,29 @@ export class AdminPage implements OnInit {
     );
   }
   registrar (){
-    /* this.fireService.getInfos(this.KEY_HUMANOS).subscribe(
-      info => {
-        for(let usuario of info){
-          console.log( usuario.payload.doc.data() );
-          let us = usuario.payload.doc.data();
-          //if (us.run ==  ) {
-            
-          }
-          
-        }
+     //Validacion run
+     if(!this.validoService.validRun(this.usuario.controls.run.value)){
+      alert("Rut invalido");
+      return;
+    }
+    //Validacion edad
+    if(!this.validoService.validEdad(17, this.usuario.controls.fNac.value)){
+      alert("Debe ser mayor de 17 para registrarse");
+      return;
+    }
+    //Validacion contraseña
+    if (this.usuario.controls.password.value != this.verificar_password) {
+      alert('contraseñas no coinciden');
+      return;
+    }
+    this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.value.run && us.correo == this.usuario.value.correo)
+      if (this.usuarioExiste == undefined){
+      this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
+      alert('Usuario registrado');
+      this.usuario.reset();
+      }else{
+        alert('Usuario ya esta Registrado')
       }
-    ); */
-    this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
-    this.usuario.reset();
-    
   }
 /*   async registrar() {
     if (this.usuario.controls.password.value != this.verificar_password) {
