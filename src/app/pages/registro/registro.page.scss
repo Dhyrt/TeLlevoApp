@@ -14,6 +14,9 @@ ion-card {
     align-items: center;
     padding: 1rem 0px 1rem 0px;
     border-radius: 2%;
+    ion-item{
+        --background: none;
+    }
     ion-radio-group{
         display: flex;
     }
@@ -37,7 +40,20 @@ ion-card {
             margin: 5px 20px 20px 20px;
         }
         ion-item{
-            font-size: 15px;
+            ion-label{
+                font-size: 15px;
+            }
+            ion-input{
+             font-size: 13px;   
+            }
+        }
+        .botones{
+            display: flex;
+            align-items: center;
+            ion-button{
+                margin-left: 0px;
+                padding: 0px;
+            }
         }
     }
 }

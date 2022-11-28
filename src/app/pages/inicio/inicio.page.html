@@ -20,10 +20,23 @@
     <div class="item-2">
       <ion-label position="stacked">Viajes disponibles</ion-label>
       <ion-list *ngFor="let v of viajes">
-        <ion-item class="viajes">
-          <p>{{v.id}} - Destino: {{ v.destino_palabra }} - Capacidad: {{v.capacidad}} - Valor: {{v.valor}}</p>
-          <ion-button (click)="tomarViaje(v.id)">Tomar</ion-button>
-        </ion-item>
+          <ion-card>
+            <ion-card-content>
+              <ion-item>
+                <ion-label>{{v.id}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Destino: {{ v.destino_palabra }}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Capacidad: {{v.capacidad}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Valor: {{v.valor}}</ion-label>
+              </ion-item>
+              <ion-button (click)="tomarViaje(v.id)">Tomar</ion-button>
+            </ion-card-content>
+          </ion-card>
       </ion-list>
     </div>
     <div class="map">

@@ -123,7 +123,7 @@
           <h2>Usuarios</h2>
         </div>
         <ion-list *ngFor="let us of usuarios">
-          <p>{{us.run}} - {{us.nombre}} - {{us.apellido}} - {{us.correo}} - {{us.password}} - {{us.marca}}</p>
+          <p>{{us.run}} - {{us.nombre}} - {{us.apellido}} - {{us.correo}} - {{us.password}} - {{us.tipo_usuario}}</p>
           <div class="botones">
             <ion-button color="tertiary" (click)="buscar(us.id)">Traer</ion-button>
             <ion-button color="danger" (click)="eliminar(us.id)">Eliminar</ion-button>

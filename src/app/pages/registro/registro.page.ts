@@ -64,6 +64,10 @@ export class RegistroPage implements OnInit {
     );
   }
 
+  cancelar(){
+    this.usuario.reset();
+    this.router.navigate(['/home']);
+  }
 
   registrar(){
     //Validacion run
