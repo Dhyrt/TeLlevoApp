@@ -35,6 +35,9 @@
     .item-2{
         margin: 2rem 0px 2rem 0px;
         text-align: left;
+        .viajes{
+            width: 60vw;
+        }
     }
     ion-item{
         width: 25vw;
@@ -109,6 +112,10 @@ ion-footer{
         .item-2{
             margin: 1rem 0px 1rem 0px;
             text-align: left;
+            .viajes{
+                width: 80vw;
+                font-size: 10px;
+            }
         }
         ion-button{
             width: 23vw;

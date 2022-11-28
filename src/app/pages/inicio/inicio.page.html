@@ -15,16 +15,13 @@
       <ion-item>
         <input type="text" id="autocompletar" position="stacked">
       </ion-item>
-      <ion-button (click)="calculoRuta()" >Buscar</ion-button>
+      <ion-button (click)="calculoRuta()" >G. Ruta</ion-button>
     </div>
     <div class="item-2">
       <ion-label position="stacked">Viajes disponibles</ion-label>
       <ion-list *ngFor="let v of viajes">
-        <ion-item>
-          <p>{{ v.id }}</p>
-          <p>{{ v.destino_palabra }}</p>
-          <p>{{ v.capacidad}}</p>
-          <p>{{ v.valor}}</p>
+        <ion-item class="viajes">
+          <p>{{v.id}} - Destino: {{ v.destino_palabra }} - Capacidad: {{v.capacidad}} - Valor: {{v.valor}}</p>
           <ion-button (click)="tomarViaje(v.id)">Tomar</ion-button>
         </ion-item>
       </ion-list>
