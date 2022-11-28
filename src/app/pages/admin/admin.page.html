@@ -67,24 +67,25 @@
                 <h2>Registro vehiculo</h2>
                 <ion-item>
                   <ion-label position="stacked">Marca</ion-label>
-                  <ion-input type="text" placeholder="Ingrese Marca" formControlName="marca"></ion-input>
+                  <ion-input type="text" placeholder="Ingrese Marca" [(ngmodel)]="marca"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label position="stacked">Modelo</ion-label>
-                  <ion-input type="text" placeholder="Ingrese Modelo" formControlName="modelo"></ion-input>
+                  <ion-input type="text" placeholder="Ingrese Modelo" [(ngmodel)]="modelo"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label position="stacked">Capacidad</ion-label>
-                  <ion-input type="text" placeholder="Ingrese capacidad máx. de personas" formControlName="capac">
-                  </ion-input>
+                  <ion-select interface="popover" placeholder="capacidad" [(ngmodel)]="capac">
+                    <ion-select-option value="4">4</ion-select-option>
+                </ion-select>
                 </ion-item>
                 <ion-item>
                   <ion-label position="stacked">Patente</ion-label>
-                  <ion-input type="text" placeholder="Ej: AA-AA-11" formControlName="patente" pattern="[A-Z]{2}-[A-Z]{2}-[0-9]{2}"></ion-input>
+                  <ion-input type="text" placeholder="Ej: AA-AA-11" [(ngmodel)]="patente" pattern="[A-Z]{2}-[A-Z]{2}-[0-9]{2}"></ion-input>
                 </ion-item>
                 <ion-list>
                   <ion-item>
-                    <ion-select interface="popover" placeholder="Seleccione Año" formControlName="anio">
+                    <ion-select interface="popover" placeholder="Seleccione Año" [(ngmodel)]="anio">
                       <ion-select-option value="2016">2016</ion-select-option>
                       <ion-select-option value="2017">2017</ion-select-option>
                       <ion-select-option value="2018">2018</ion-select-option>
@@ -97,7 +98,7 @@
                 </ion-list>
                 <ion-list>
                   <ion-item>
-                    <ion-select interface="popover" placeholder="Seleccione color" formControlName="color">
+                    <ion-select interface="popover" placeholder="Seleccione color" [(ngmodel)]="color">
                       <ion-select-option value="rojo">Rojo</ion-select-option>
                       <ion-select-option value="azul">Azul</ion-select-option>
                       <ion-select-option value="amarillo">Amarillo</ion-select-option>
@@ -110,7 +111,7 @@
                 </ion-list>
                 <ion-item>
                   <ion-label position="stacked">Número de licencia</ion-label>
-                  <ion-input type="number" placeholder="Ej: 12345678" formControlName="licencia"></ion-input>
+                  <ion-input type="number" placeholder="Ej: 12345678" [(ngmodel)]="licencia"></ion-input>
                 </ion-item>
               </div>
             </ion-item>

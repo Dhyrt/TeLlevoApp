@@ -13,10 +13,10 @@ import { FireService } from 'src/app/services/fire.service';
 export class LoginPage implements OnInit {
 
   usuarios: any[] = [];
-  correo: string;
-  password: string;
+  correo: string = '';
+  password: string = '';
   KEY_HUMANOS = 'usuarios';
-  usuarioLogin : any;
+  usuarioLogin : any = {};
   
   /* usuario = {
     correo: '',
@@ -42,9 +42,9 @@ export class LoginPage implements OnInit {
     );
   }
 
- /* login() {
+ login() {
     this.usuarioLogin = this.usuarios.find( us => us.correo == this.correo && us.password == this.password)
-    if (this.usuarioLogin != undefined) {
+      if (this.usuarioLogin != undefined) {
       this.fireService.validarLogin()
       var navigationExtras: NavigationExtras = {
         state: {
@@ -71,10 +71,10 @@ export class LoginPage implements OnInit {
       icon: 'skull-outline'
     });
     toast.present();
-  } */
+  }
 
   
-  login(){
+  /* login(){
     var usuarioLogin = this.storageService.validarLogin(this.correo, this.password);
     if ( usuarioLogin != undefined ) {
       var navigationExtras: NavigationExtras = {
@@ -101,7 +101,7 @@ export class LoginPage implements OnInit {
       icon: 'skull-outline'
     });
     toast.present();
-  } 
+  }  */
 
 }
 
