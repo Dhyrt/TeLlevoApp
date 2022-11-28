@@ -27,9 +27,17 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar color="dark">
-    <ion-button class="img" fill="clear" slot="start" routerLink="/inicio-c"><ion-icon name="home"></ion-icon></ion-button>
-    <ion-button class="img img2" fill="clear" (click)="abrirMapa()"><ion-icon name="navigate-circle"></ion-icon></ion-button>
-    <ion-button class="img img2" fill="clear" slot="end"><ion-icon name="person-circle-outline"></ion-icon></ion-button>
-  </ion-toolbar>
+  <div class="bottom">
+    <div>
+      <ion-button class="img img2 active" fill="clear" (click)="abrirMapa()"><ion-icon name="navigate-circle"></ion-icon></ion-button>
+    <span class="blur"></span>
+    <span class="indicador"></span>
+    </div>
+    <div>
+      <ion-button class="img noactivo" fill="clear" routerLink="/inicio-c"><ion-icon name="home"></ion-icon></ion-button>
+    </div>
+    <div>
+      <ion-button class="img img2 noactivo" fill="clear" routerLink="/confg-c"><ion-icon name="person-circle-outline"></ion-icon></ion-button>
+    </div>
+  </div>
 </ion-footer>

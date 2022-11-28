@@ -43,11 +43,6 @@ const routes: Routes = [
     //canActivate: [AuthGuard]
   },
   {
-    path: 'confg-a',
-    loadChildren: () => import('./pages/confg-a/confg-a.module').then( m => m.ConfgAPageModule),
-    //canActivate: [AuthGuard]
-  },
-  {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule),
     //canActivate: [AuthGuard]
