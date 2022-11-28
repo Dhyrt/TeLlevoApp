@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
 import { Icon } from 'ionicons/dist/types/components/icon/icon';
-import { StorageService } from 'src/app/services/storage.service';
+
 import { FireService } from 'src/app/services/fire.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
   correo: string;
   password: string;
   KEY_HUMANOS = 'usuarios';
-  constructor(private toastController: ToastController, private router: Router, private storageService: StorageService, private fireService: FireService) { }
+  constructor(private toastController: ToastController, private router: Router, private fireService: FireService) { }
 
   ngOnInit() {
     //this.loadInfos();
@@ -67,7 +67,7 @@ export class LoginPage implements OnInit {
 
   
   login(){
-    var usuarioLogin = this.storageService.validarLogin(this.correo, this.password);
+    var usuarioLogin = this.fireService.validarLogin(this.correo, this.password);
     if ( usuarioLogin != undefined ) {
       var navigationExtras: NavigationExtras = {
         state: {
