@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ValidService } from 'src/app/services/valid.service';
@@ -39,13 +40,32 @@ export class RegistroPage implements OnInit {
   usuarios: any[] = [];
   autos: any[] = [];
   KEY_HUMANOS = 'usuarios';
-  constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService, private storageService: StorageService) { }
+  usuarioExiste: any = '';
+  constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService, private storageService: StorageService, 
+    private fireService : FireService) { }
 
   ngOnInit() {
-    this.usuarios = this.usuarioService.obtenerUsuarios()
+    //this.usuarios = this.usuarioService.obtenerUsuarios()
+    this.loadInfos();
   }
 
-  async registrar(){
+  loadInfos() {
+    //this.usuarios = await this.storage.getInfos(this.KEY_HUMANOS);
+    this.fireService.getInfos(this.KEY_HUMANOS).subscribe(
+      info => {
+        this.usuarios = [];
+        for(let usuario of info){
+          console.log( usuario.payload.doc.data() );
+          let us = usuario.payload.doc.data();
+          us['id'] = usuario.payload.doc.id;
+          this.usuarios.push( us );
+        }
+      }
+    );
+  }
+
+
+  registrar(){
     //Validacion run
     if(!this.validoService.validRun(this.usuario.controls.run.value)){
       alert("Rut invalido");
@@ -61,10 +81,15 @@ export class RegistroPage implements OnInit {
       alert('contraseñas no coinciden');
       return;
     }
-    await this.storageService.agregar(this.KEY_HUMANOS, this.usuario.value);
-    alert('Usuario registrado');
-    this.usuario.reset();
-    this.router.navigate(['/login']);
+    this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.value.run && us.correo == this.usuario.value.correo)
+      if (this.usuarioExiste == undefined){
+      this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
+      alert('Usuario registrado');
+      this.usuario.reset();
+      this.router.navigate(['/login']);
+      }else{
+        alert('Usuario ya esta Registrado')
+      }
   }
 
 }
