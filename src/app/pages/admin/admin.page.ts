@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -42,17 +43,47 @@ export class AdminPage implements OnInit {
   verificar_password: string;
   usuarios: any[] = [];
   KEY_HUMANOS = 'usuarios';
+  registrado : boolean = false 
+  id_nuevo: any = '';
+  constructor(private router: Router, private storage: StorageService, private loading: LoadingController, private fireService: FireService) { }
 
-  constructor(private router: Router, private storage: StorageService, private loading: LoadingController) { }
-
-  async ngOnInit() {
-    await this.loadInfos();
+  ngOnInit() {
+    //await this.loadInfos();
+    this.loadInfos();
   }
 
-  async loadInfos() {
-    this.usuarios = await this.storage.getInfos(this.KEY_HUMANOS);
+  loadInfos() {
+    //this.usuarios = await this.storage.getInfos(this.KEY_HUMANOS);
+    this.fireService.getInfos(this.KEY_HUMANOS).subscribe(
+      info => {
+        this.usuarios = [];
+        for(let usuario of info){
+          console.log( usuario.payload.doc.data() );
+          let us = usuario.payload.doc.data();
+          us['id'] = usuario.payload.doc.id;
+          this.usuarios.push( us );
+        }
+      }
+    );
   }
-  async registrar() {
+  registrar (){
+    /* this.fireService.getInfos(this.KEY_HUMANOS).subscribe(
+      info => {
+        for(let usuario of info){
+          console.log( usuario.payload.doc.data() );
+          let us = usuario.payload.doc.data();
+          //if (us.run ==  ) {
+            
+          }
+          
+        }
+      }
+    ); */
+    this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
+    this.usuario.reset();
+    
+  }
+/*   async registrar() {
     if (this.usuario.controls.password.value != this.verificar_password) {
       alert('Contraseñas no coinciden');
       return;
@@ -76,32 +107,46 @@ export class AdminPage implements OnInit {
       alert('Usuario Existente');
       return;
     }
+  } */
+
+  eliminar(id) {
+    this.fireService.eliminar(this.KEY_HUMANOS,id)
+    //await this.storage.eliminar(this.KEY_HUMANOS, rutEliminar);
+    this.loadInfos();
   }
 
-  async eliminar(rutEliminar) {
-    await this.storage.eliminar(this.KEY_HUMANOS, rutEliminar);
-    await this.loadInfos();
-  }
-
-  async buscar(rutBuscar) {
+  /* async buscar(rutBuscar) {
     var usuarioEncontrado = await this.storage.getInfo(this.KEY_HUMANOS, rutBuscar);
     this.usuario.setValue(usuarioEncontrado);
     this.verificar_password = usuarioEncontrado.password;
-  }
-
-  async modificar() {
+  } */
+buscar(id){
+  this.fireService.getInfo(this.KEY_HUMANOS, id).subscribe(
+    (info: any)  => {
+      console.log( info.data() );
+      this.usuario.setValue( info.data() );
+      this.id_nuevo = info.id;
+      this.verificar_password = info.password;
+    }
+  )
+}
+  /* async modificar() {
     await this.storage.actualizar(this.KEY_HUMANOS, this.usuario.value);
     await this.loadInfos();
     this.limpiar();
+  } */
+  actualizar(){
+    this.fireService.actualizar(this.KEY_HUMANOS, this.id_nuevo, this.usuario.value)
+    this.usuario.reset();
+    this.id_nuevo = '';
   }
-
   limpiar() {
     this.usuario.reset();
     this.verificar_password = '';
   }
 
   async salir() {
-    await this.storage.logout();
+    await this.fireService.logout();
   }
 
 }

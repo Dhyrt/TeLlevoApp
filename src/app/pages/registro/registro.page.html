@@ -14,7 +14,7 @@
         <form [formGroup]="usuario" (ngSubmit)="registrar()">
           <ion-item>
             <ion-label position="stacked">Run</ion-label>
-            <ion-input type="text" placeholder="Ingrese Run" formControlName="run"></ion-input>
+            <ion-input type="text" placeholder="Ingrese Run ej: 12.345.678-9" formControlName="run"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Nombre</ion-label>
@@ -38,7 +38,7 @@
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Confirmación contraseña</ion-label>
-            <ion-input type="password" placeholder="Ingrese contraseña nuevamente" [(ngModel)]="verificar_password" [ngModelOptions]="{standalone: 'true'}"></ion-input>
+            <ion-input type="password" placeholder="Ingrese contraseña nuevamente" name="verificar_password" [(ngModel)]="verificar_password" [ngModelOptions]="{standalone: 'true'}"></ion-input>
           </ion-item>
           <ion-radio-group formControlName="tipo_usuario" [(ngModel)]="tipo_usuario">
             <ion-item>

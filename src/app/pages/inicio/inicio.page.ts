@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 declare var google;
@@ -33,8 +34,8 @@ export class InicioPage implements OnInit {
         capacidad: 4,
         pasRuns: []
     };
-
-    constructor(private router: Router, private storage: StorageService) { }
+    id_nuevo2: any = '';
+    constructor(private router: Router, private storage: StorageService, private fireService: FireService) { }
 
     async ngOnInit() {
         this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
@@ -43,23 +44,38 @@ export class InicioPage implements OnInit {
         this.ubicacionActual.lng = ubi.coords.longitude;
         this.traerMapa();
         this.encontarUbicacion(this.mapa, this.marcador);
-        await this.loadViajes();
+        this.loadViajes();
         this.rut = this.usuario.run;
     }
 
-    async loadViajes() {
+    /* async loadViajes() {
         this.viajes = await this.storage.getInfosV(this.KEY_VIAJES);
         console.log(this.viajes)
+    } */
+    loadViajes(){
+        this.fireService.getInfos(this.KEY_VIAJES).subscribe(
+            info => {
+              this.viajes = [];
+              for(let viaje of info){
+                console.log( viaje.payload.doc.data() );
+                let vi = viaje.payload.doc.data();
+                vi['id'] = viaje.payload.doc.id;
+                this.viajes.push( vi );
+                this.id_nuevo2 = this.viaje.id; 
+              }
+            }
+          );
+
     }
 
     async tomarViaje(id_viaje) {
         
         let indice = this.viajes.findIndex(v => v.id == id_viaje)
         this.viajes[indice].pasRuns.push(this.rut);
-        
+        this.fireService.modificarViajesExistentes(this.KEY_VIAJES, this.id_nuevo2, this.viaje )
         //this.viaje.pasRuns = [this.rut];
         //var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
-        await this.storage.modificarViajesExistentes(this.KEY_VIAJES, this.viajes);
+        //await this.storage.modificarViajesExistentes(this.KEY_VIAJES, this.viajes);
         /* if(res){
           alert('Viaje Tomado');
           await this.loadViajes();

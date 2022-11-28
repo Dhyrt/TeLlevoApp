@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 declare var google;
@@ -41,7 +42,7 @@ export class InicioCPage implements OnInit {
     };
 
 
-    constructor(private router: Router, private storage: StorageService) { }
+    constructor(private router: Router, private storage: StorageService, private fireService : FireService) { }
 
     async ngOnInit() {
         this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
@@ -56,11 +57,24 @@ export class InicioCPage implements OnInit {
 
 
     async loadViajes() {
-        this.viajes = await this.storage.getInfosV(this.KEY_VIAJES);
+        //this.viajes = await this.storage.getInfosV(this.KEY_VIAJES);
+        this.fireService.getInfos(this.KEY_VIAJES).subscribe(
+            info => {
+              this.viajes = [];
+              for(let viaje of info){
+                console.log( viaje.payload.doc.data() );
+                let vi = viaje.payload.doc.data();
+                vi['id'] = viaje.payload.doc.id;
+                this.viajes.push( vi );
+              }
+            }
+          );
     }
 
     async crearViaje() {
-        this.viaje.id = '';
+        this.fireService.agregar(this.KEY_VIAJES, this.viaje);
+        
+       /*  this.viaje.id = '';
         this.viaje.inicio = this.ubicacionDuoc;
         this.viaje.destino = this.ubicacionActual;
         this.viaje.runCond = this.rut;
@@ -70,7 +84,7 @@ export class InicioCPage implements OnInit {
         if (res) {
             alert('Viaje Creado');
             await this.loadViajes();
-        }
+        } */
     }
 
     //Inicio mapa
@@ -419,7 +433,7 @@ export class InicioCPage implements OnInit {
         );
     }
     async salir() {
-        await this.storage.logout();
+        await this.fireService.logout();
     }
 
 }
