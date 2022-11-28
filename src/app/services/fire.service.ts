@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore  } from '@angular/fire/compat/firestore';
+import { AngularFirestore  } from '@angular/fire/compat/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 

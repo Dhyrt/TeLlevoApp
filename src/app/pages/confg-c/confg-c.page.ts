@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FireService } from 'src/app/services/fire.service';
 
 @Component({
   selector: 'app-confg-c',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfgCPage implements OnInit {
 
-  constructor() { }
+  constructor(private fireService : FireService) { }
 
   ngOnInit() {
+  }
+
+  async salir() {
+    await this.fireService.logout();
   }
 
 }

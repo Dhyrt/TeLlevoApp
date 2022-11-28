@@ -1,0 +1,178 @@
+.logo{
+    width: 200px;
+}
+
+@media(max-width: 400px){
+    .logo{
+        width: 130px;
+        justify-content: left;
+    }
+}
+ion-card {
+    --background: linear-gradient(#fff5e0, #3c71adee);
+    margin: 0 auto;
+    top: 5vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0px 1rem 0px;
+    border-radius: 2%;
+    h4{
+        color: #000;
+    }
+    ion-item{
+        --background: none;
+        margin: 15px auto 15px auto;
+        ion-label{
+            color: #000;
+        }
+        ion-icon{
+            color: #000;
+        }
+    }
+}
+
+ion-footer{
+    ion-icon{
+        font-size: 35px;
+    }
+    div{
+        display: flex;
+        width: 90%;
+        height: 60px;
+        background-color: #fff;
+        position: relative;
+        bottom: 0;
+        margin: 0 auto;
+        padding-top: 8px;
+        justify-content: space-around;
+        .active{
+            transform: translateY(-1px);
+            position: relative;
+            top: -50px;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            background-color: #3080e2c9;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .blur{
+            position: absolute;
+            top: -30px;
+            width: 60px;
+            height: 60px;
+            background: #307FE2;
+            border-radius: 50%;
+            filter: blur(5px);
+            opacity: 0.5;
+            z-index: 5;
+
+        }
+        .indicador{
+            position: absolute;
+            top: -45px;
+            width: 75px;
+            height: 75px;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 0;
+            transition: 0.5;
+
+        }
+        .indicador::before{
+            content: '';
+            position: absolute;
+            bottom: 30px;
+            left: -30px;
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            border-radius: 45%;
+            box-shadow: 15px 18px #fff;
+        }
+        .indicador::after{
+            content: '';
+            position: absolute;
+            bottom: 30px;
+            right: -30px;
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            border-radius: 45%;
+            box-shadow: -15px 18px #fff;
+        }
+    }
+    
+}
+
+@media (max-width: 400px) {
+    ion-card {
+        width: 85vw;
+        padding: 1rem 1rem 1rem 1rem;
+        border-radius: 2.5%;
+        ion-radio-group{
+            display: block;
+        }
+        ion-card-title{
+            font-size: 20px;
+        }
+        ion-button{
+            margin: 5px 20px 20px 20px;
+        }
+        ion-item{
+            font-size: 15px;
+        }
+    }
+    ion-footer{
+        ion-icon{
+            font-size: 29px;
+        }
+        div{
+            display: flex;
+            width: 100%;
+            height: 45px;
+            padding-top: 1.3px;
+            .noactivo{
+                margin-top: 0px;
+            }
+            .active{
+                transform: translateY(1px);
+                top: -28px;
+                width: 50px;
+                height: 50px;
+                padding: 0px;
+                font-size: 5px;
+            }
+            .blur{
+                top: -18px;
+                width: 55px;
+                height: 55px;
+    
+            }
+            .indicador{
+                top: -27px;
+                width: 60px;
+                height: 60px;
+    
+            }
+            .indicador::before{
+                bottom: 32.5px;
+                left: -26px;
+                width: 30px;
+                height: 30px;
+                border-radius: 45%;
+                box-shadow: 15px 18px #fff;
+            }
+            .indicador::after{
+                bottom: 32.5px;
+                right: -26px;
+                width: 30px;
+                height: 30px;
+                border-radius: 45%;
+                box-shadow: -15px 18px #fff;
+            }
+        }
+    }
+  }

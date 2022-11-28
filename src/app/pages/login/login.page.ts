@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
 import { Icon } from 'ionicons/dist/types/components/icon/icon';
-import { StorageService } from 'src/app/services/storage.service';
+
 import { FireService } from 'src/app/services/fire.service';
 
 @Component({
@@ -23,6 +23,7 @@ export class LoginPage implements OnInit {
     password: '' 
   }; */
   constructor(private toastController: ToastController, private router: Router, private storageService: StorageService, private fireService: FireService) { }
+
 
   ngOnInit() {
     this.loadInfos();

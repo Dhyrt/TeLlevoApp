@@ -427,6 +427,6 @@ export class InicioPage implements OnInit {
         );
     }
     async salir() {
-        await this.storage.logout();
+        await this.fireService.logout();
     }
 }

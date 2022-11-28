@@ -99,7 +99,10 @@
                   <ion-input type="number" placeholder="Ej: 12345678"formControlName="licencia"></ion-input>
                 </ion-item>
             </div>
-          <ion-button color="secondary" type="submit" [disabled]="!usuario.valid">registrar</ion-button>  
+          <div class="botones">
+            <ion-button color="secondary" type="submit" [disabled]="!usuario.valid">registrar</ion-button>
+            <ion-button color="danger" (click)="cancelar()"><ion-icon name="close-outline"></ion-icon></ion-button>
+          </div>
         </form>
       </ion-card-content>
     </ion-card>

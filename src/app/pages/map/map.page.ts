@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 declare var google;
@@ -24,7 +25,7 @@ export class MapPage implements OnInit {
   usuario : any;
   KEY_HUMANOS = 'humanos';
 
-  constructor(private router: Router, private loading: LoadingController, private activatedRoute: ActivatedRoute, private storage: StorageService) { }
+  constructor(private router: Router, private loading: LoadingController, private activatedRoute: ActivatedRoute, private storage: StorageService, private fireService : FireService) { }
 
   async ngOnInit() {
     this.rut = this.activatedRoute.snapshot.paramMap.get('rut');
@@ -381,7 +382,7 @@ export class MapPage implements OnInit {
     );
   }
   async salir() {
-    await this.storage.logout();
+    await this.fireService.logout();
     }
 
 }
