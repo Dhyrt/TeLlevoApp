@@ -53,13 +53,10 @@ export class FireService {
     }
   }
 
-  validarLogin(correo, password){
-    var usuarioLogin = this.usuarios.find(usu => usu.correo == correo && usu.password == password);
-    if(usuarioLogin != undefined){
-      this.isAuthenticated.next(true);
-      return usuarioLogin;
-    }
-  }
+  validarLogin(){
+    
+      this.isAuthenticated.next(true);}
+
 
   getAuth(){
     return this.isAuthenticated.value;

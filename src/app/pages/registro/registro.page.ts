@@ -40,12 +40,30 @@ export class RegistroPage implements OnInit {
   usuarios: any[] = [];
   autos: any[] = [];
   KEY_HUMANOS = 'usuarios';
+  usuarioExiste: any = '';
   constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService, private storageService: StorageService, 
     private fireService : FireService) { }
 
   ngOnInit() {
     //this.usuarios = this.usuarioService.obtenerUsuarios()
+    this.loadInfos();
   }
+
+  loadInfos() {
+    //this.usuarios = await this.storage.getInfos(this.KEY_HUMANOS);
+    this.fireService.getInfos(this.KEY_HUMANOS).subscribe(
+      info => {
+        this.usuarios = [];
+        for(let usuario of info){
+          console.log( usuario.payload.doc.data() );
+          let us = usuario.payload.doc.data();
+          us['id'] = usuario.payload.doc.id;
+          this.usuarios.push( us );
+        }
+      }
+    );
+  }
+
 
   registrar(){
     //Validacion run
@@ -63,10 +81,15 @@ export class RegistroPage implements OnInit {
       alert('contraseñas no coinciden');
       return;
     }
-    this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
-    alert('Usuario registrado');
-    this.usuario.reset();
-    this.router.navigate(['/login']);
+    this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.value.run && us.correo == this.usuario.value.correo)
+      if (this.usuarioExiste == undefined){
+      this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
+      alert('Usuario registrado');
+      this.usuario.reset();
+      this.router.navigate(['/login']);
+      }else{
+        alert('Usuario ya esta Registrado')
+      }
   }
 
 }
