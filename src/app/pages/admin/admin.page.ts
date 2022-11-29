@@ -65,7 +65,7 @@ export class AdminPage implements OnInit {
           let us: any = usuario.payload.doc.data(); 
           console.log (us)           
           us['id'] = usuario.payload.doc.id;
-          if (us.tipo_usuario == 'administradorPrefe')  {
+          if (us.tipo_usuario != 'administradorPrefe')  {
             this.usuarios.push(us);}
         }
       }
