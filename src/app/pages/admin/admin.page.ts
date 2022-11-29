@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { Alert } from 'selenium-webdriver';
 import { FireService } from 'src/app/services/fire.service';
 import { ValidService } from 'src/app/services/valid.service';
 
@@ -12,7 +13,7 @@ import { ValidService } from 'src/app/services/valid.service';
 })
 export class AdminPage implements OnInit {
 
-  usuario = new FormGroup({
+  usuario= new FormGroup({
     run: new FormControl('', [Validators.required,
     Validators.pattern('[0-9]{1,2}.[0-9]{3}.[0-9]{3}-[0-9kK]{1}')]),
     nombre: new FormControl('', [Validators.required,
@@ -24,7 +25,7 @@ export class AdminPage implements OnInit {
     password: new FormControl('', [Validators.required,
     Validators.minLength(6),
     Validators.maxLength(18)]),
-    tipo_usuario: new FormControl('', [Validators.required]),
+    tipo_usuario: new FormControl('', []),
     vehi: new FormControl('', [])
       
     
@@ -46,7 +47,7 @@ export class AdminPage implements OnInit {
   registrado : boolean = false 
   id_nuevo: any = '';
   usuarioExiste : any = '';
-
+  tipo_usuario: any = '';
   v_registrar: boolean = false;
   constructor(private router: Router, private loading: LoadingController, private fireService: FireService, private validoService: ValidService ) { }
 
@@ -72,6 +73,7 @@ export class AdminPage implements OnInit {
     );
   }
   registrar (){
+    //alert('test')
      //Validacion run
      if(!this.validoService.validRun(this.usuario.controls.run.value)){
       alert("Rut invalido");
@@ -99,7 +101,7 @@ export class AdminPage implements OnInit {
       alert('licencia esta vacia ingrese licencia')
       return;
     }
-    this.vehi.setValue(this.vehi);
+    this.usuario.controls.vehi.setValue(this.vehi);
 
     this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.controls.run.value && us.correo == this.usuario.controls.correo.value)
       if (this.usuarioExiste == undefined){
@@ -107,6 +109,7 @@ export class AdminPage implements OnInit {
       this.v_registrar = true;
       alert('Usuario registrado');
       this.usuario.reset();
+      this.vehi.reset();
       }else{
         alert('Usuario ya esta Registrado')
       }

@@ -24,24 +24,27 @@ export class RegistroPage implements OnInit {
     password: new FormControl('', [Validators.required,
     Validators.minLength(6),
     Validators.maxLength(18)]),
-    tipo_usuario: new FormControl('', Validators.required),
-    vehi: new FormGroup({
-      marca: new FormControl('', [Validators.minLength(2)]),
-      modelo: new FormControl('', [Validators.minLength(2)]),
-      patente: new FormControl('', [Validators.pattern('[A-Z]{2}-[A-Z]{2}-[0-9]{2}')]),
-      anio: new FormControl('',),
-      color: new FormControl('',),
-      capac: new FormControl('', [Validators.min(1)]),
-      licencia: new FormControl('', [Validators.min(11111111), Validators.max(99999999)]),
-    })
+    tipo_usuario: new FormControl('', []),
+    vehi: new FormControl('', [])
+    
   });
-
+  vehi: any = {
+    marca: '',
+    modelo: '', 
+    patente: '', 
+    anio: '',
+    color: '',
+    capac: '',
+    licencia: ''
+  }
   verificar_password: string;
   usuarios: any[] = [];
-  autos: any[] = [];
   KEY_HUMANOS = 'usuarios';
-  usuarioExiste: any = '';
-
+  registrado : boolean = false 
+  id_nuevo: any = '';
+  usuarioExiste : any = '';
+  tipo_usuario: any = '';
+  
   //variable de pruebas unitarias:
   v_registrar: boolean = false;
 
@@ -72,16 +75,18 @@ export class RegistroPage implements OnInit {
   cancelar() {
     this.usuario.reset();
     this.router.navigate(['/home']);
+    
   }
 
-  registrar() {
-    //Validacion run
-    if (!this.validoService.validRun(this.usuario.controls.run.value)) {
+  registrar (){
+    //alert('test')
+     //Validacion run
+     if(!this.validoService.validRun(this.usuario.controls.run.value)){
       alert("Rut invalido");
       return;
     }
     //Validacion edad
-    if (!this.validoService.validEdad(17, this.usuario.controls.fNac.value)) {
+    if(!this.validoService.validEdad(17, this.usuario.controls.fNac.value)){
       alert("Debe ser mayor de 17 para registrarse");
       return;
     }
@@ -90,16 +95,30 @@ export class RegistroPage implements OnInit {
       alert('contraseñas no coinciden');
       return;
     }
+    if (this.usuario.controls.password.value != this.verificar_password) {
+      alert('Contraseñas no coinciden');
+      return;
+    }
+    if (this.vehi.patente == '') {
+      alert('patente esta vacia ingrese patente')
+      return;
+    }
+    if (this.vehi.licencia == '') {
+      alert('licencia esta vacia ingrese licencia')
+      return;
+    }
+    this.usuario.controls.vehi.setValue(this.vehi);
+
     this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.controls.run.value && us.correo == this.usuario.controls.correo.value)
-    if (this.usuarioExiste == undefined) {
+      if (this.usuarioExiste == undefined){
       this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
       this.v_registrar = true;
       alert('Usuario registrado');
       this.usuario.reset();
       this.router.navigate(['/login']);
-    } else {
-      alert('Usuario ya esta Registrado')
-    }
+      }else{
+        alert('Usuario ya esta Registrado')
+      }
   }
 
 }
