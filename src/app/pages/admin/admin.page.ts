@@ -85,7 +85,7 @@ export class AdminPage implements OnInit {
       alert('contraseñas no coinciden');
       return;
     }
-    this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.value.run && us.correo == this.usuario.value.correo)
+    this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.controls.run.value && us.correo == this.usuario.controls.correo.value)
       if (this.usuarioExiste == undefined){
       this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
       alert('Usuario registrado');
