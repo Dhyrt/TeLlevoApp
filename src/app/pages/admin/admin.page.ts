@@ -109,7 +109,7 @@ export class AdminPage implements OnInit {
       this.v_registrar = true;
       alert('Usuario registrado');
       this.usuario.reset();
-      this.vehi.reset();
+      this.limpiar();
       }else{
         alert('Usuario ya esta Registrado')
       }
@@ -172,7 +172,15 @@ buscar(id){
     this.id_nuevo = '';
   }
   limpiar() {
-    this.usuario.reset();
+    this.vehi = {
+      marca: '',
+      modelo: '', 
+      patente: '', 
+      anio: '',
+      color: '',
+      capac: '',
+      licencia: ''
+    };
     this.verificar_password = '';
   }
 
