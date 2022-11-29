@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { NavigationExtras, Router } from '@angular/router';
+import { ModalController, NavController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -42,7 +42,7 @@ export class InicioCPage implements OnInit {
     };
 
 
-    constructor(private router: Router, private storage: StorageService, private fireService : FireService) { }
+    constructor(private router: Router, private storage: StorageService, private fireService : FireService, public navCrtl: NavController) { }
 
     async ngOnInit() {
         this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
@@ -52,9 +52,25 @@ export class InicioCPage implements OnInit {
         this.traerMapa();
         this.encontarUbicacion(this.mapa, this.marcador);
         await this.loadViajes();
-        this.rut = this.usuario.run;
     }
 
+    perfil(){
+        var navigationExtras: NavigationExtras = {
+            state: {
+                usuario: this.usuario
+            }
+        };
+        this.router.navigate(['/confg-c'], navigationExtras);
+    }
+
+    irMapa(){
+        var navigationExtras: NavigationExtras = {
+            state: {
+                usuario: this.usuario
+            }
+        };
+        this.router.navigate(['/map'], navigationExtras);
+    }
 
     async loadViajes() {
         //this.viajes = await this.storage.getInfosV(this.KEY_VIAJES);

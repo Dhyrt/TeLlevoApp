@@ -50,12 +50,12 @@ const routes: Routes = [
   {
     path: 'inicio',
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule),
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'inicio-c',
     loadChildren: () => import('./pages/inicio-c/inicio-c.module').then( m => m.InicioCPageModule),
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'map',

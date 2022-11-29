@@ -6,7 +6,6 @@
 </ion-header>
 
 <ion-content>
-  <p>{{ usuario.nombre }}</p>
   <div class="inicio">
     <div class="inputLabel">
       <p>Introduce una ubicación</p>
@@ -37,7 +36,7 @@
       <ion-button class="img noactivo" fill="clear" routerLink="/inicio-c"><ion-icon name="home"></ion-icon></ion-button>
     </div>
     <div>
-      <ion-button class="img img2 noactivo" fill="clear" routerLink="/confg-c"><ion-icon name="person-circle-outline"></ion-icon></ion-button>
+      <ion-button class="img img2 noactivo" fill="clear" (click)="perfil()"><ion-icon name="person-circle-outline"></ion-icon></ion-button>
     </div>
   </div>
 </ion-footer>

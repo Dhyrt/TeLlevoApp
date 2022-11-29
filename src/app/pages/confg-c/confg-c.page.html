@@ -8,20 +8,20 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <h4>Nombre</h4>
+      <h4>{{ usuario.nombre }} {{ usuario.apellido }}</h4>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
         <ion-icon name="mail-outline"></ion-icon>
-        <ion-label>Correo</ion-label>
+        <ion-label>{{ usuario.correo }}</ion-label>
       </ion-item>
       <ion-item>
         <ion-icon name="calendar-outline"></ion-icon>
-        <ion-label>Fecha de nacimiento</ion-label>
+        <ion-label>{{ usuario.fNac }}</ion-label>
       </ion-item>
       <ion-item>
         <ion-icon name="car-sport"></ion-icon>
-        <ion-label>Tipo usuario</ion-label>
+        <ion-label>{{ usuario.tipo_usuario }}</ion-label>
       </ion-item>
     </ion-card-content>
   </ion-card>

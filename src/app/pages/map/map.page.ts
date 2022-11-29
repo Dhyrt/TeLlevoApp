@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -28,15 +28,22 @@ export class MapPage implements OnInit {
   constructor(private router: Router, private loading: LoadingController, private activatedRoute: ActivatedRoute, private storage: StorageService, private fireService : FireService) { }
 
   async ngOnInit() {
-    this.rut = this.activatedRoute.snapshot.paramMap.get('rut');
-    this.usuario = this.storage.getInfo(this.KEY_HUMANOS, this.rut);
-    console.table(this.usuario);
+    this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
     var ubi = await this.getMiPosicion();
     this.ubicacionActual.lat = ubi.coords.latitude;
     this.ubicacionActual.lng = ubi.coords.longitude;
     this.traerMapa();
     this.encontarUbicacion(this.mapa, this.marcador);
   }
+
+  perfil(){
+    var navigationExtras: NavigationExtras = {
+        state: {
+            usuario: this.usuario
+        }
+    };
+    this.router.navigate(['/confg-c'], navigationExtras);
+}
 
   traerMapa() {
     var map: HTMLElement = document.getElementById('mapa');

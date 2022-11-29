@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -46,6 +46,15 @@ export class InicioPage implements OnInit {
         this.encontarUbicacion(this.mapa, this.marcador);
         this.loadViajes();
         this.rut = this.usuario.run;
+    }
+
+    perfil(){
+        var navigationExtras: NavigationExtras = {
+            state: {
+                usuario: this.usuario
+            }
+        };
+        this.router.navigate(['/confg'], navigationExtras);
     }
 
     /* async loadViajes() {

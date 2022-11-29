@@ -41,8 +41,8 @@ describe('Pruebas unitarias: Registro', ()=>{
     let password = app.usuario.controls['password']
     let tUsuario = app.usuario.controls['tipo_usuario']
 
-    Rut.setValue('5.845.127-4');
-    nombre.setValue('A');
+    Rut.setValue('21.248.045-1');
+    nombre.setValue('Alan');
     apellido.setValue('Gajardo')
     fNac.setValue('28-05-2002')
     correo.setValue('alan.gajardo@duocuc.cl')
