@@ -41,7 +41,7 @@ export class RegistroPage implements OnInit {
   autos: any[] = [];
   KEY_HUMANOS = 'usuarios';
   usuarioExiste: any = '';
-  constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService, private storageService: StorageService, 
+  constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService, 
     private fireService : FireService) { }
 
   ngOnInit() {
@@ -85,7 +85,7 @@ export class RegistroPage implements OnInit {
       alert('contraseñas no coinciden');
       return;
     }
-    this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.value.run && us.correo == this.usuario.value.correo)
+    this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.controls.run.value && us.correo == this.usuario.controls.correo.value)
       if (this.usuarioExiste == undefined){
       this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
       alert('Usuario registrado');

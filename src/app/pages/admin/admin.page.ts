@@ -26,7 +26,7 @@ export class AdminPage implements OnInit {
     Validators.minLength(6),
     Validators.maxLength(18)]),
     tipo_usuario: new FormControl('', [Validators.required]),
-    vehi: new FormControl({}, [])
+    vehi: new FormControl('', [])
       
     
   });
@@ -62,6 +62,7 @@ export class AdminPage implements OnInit {
         for(let usuario of info){
           console.log( usuario.payload.doc.data() );
           let us = usuario.payload.doc.data();
+           
           us['id'] = usuario.payload.doc.id;
           this.usuarios.push( us );
         }
