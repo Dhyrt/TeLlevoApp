@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { FireService } from 'src/app/services/fire.service';
-import { StorageService } from 'src/app/services/storage.service';
+
 
 declare var google;
 
@@ -35,7 +35,7 @@ export class InicioPage implements OnInit {
         pasRuns: []
     };
     id_nuevo2: any = '';
-    constructor(private router: Router, private storage: StorageService, private fireService: FireService) { }
+    constructor(private router: Router, private fireService: FireService) { }
 
     async ngOnInit() {
         this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
