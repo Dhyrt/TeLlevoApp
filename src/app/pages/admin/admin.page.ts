@@ -31,7 +31,7 @@ export class AdminPage implements OnInit {
     
   });
 
-  vehi = {
+  vehi: any = {
     marca: '',
     modelo: '', 
     patente: '', 
@@ -59,12 +59,13 @@ export class AdminPage implements OnInit {
     this.fireService.getInfos(this.KEY_HUMANOS).subscribe(
       info => {
         this.usuarios = [];
-        for(let usuario of info){
-          console.log( usuario.payload.doc.data() );
-          let us = usuario.payload.doc.data();
-           
+        for (let usuario of info) {
+          console.log(usuario.payload.doc.data());
+          let us: any = usuario.payload.doc.data(); 
+          console.log (us)           
           us['id'] = usuario.payload.doc.id;
-          this.usuarios.push( us );
+          if (us.tipo_usuario != 'administradorPrefe')  {
+            this.usuarios.push(us);}
         }
       }
     );
@@ -85,6 +86,20 @@ export class AdminPage implements OnInit {
       alert('contraseñas no coinciden');
       return;
     }
+    if (this.usuario.controls.password.value != this.verificar_password) {
+      alert('Contraseñas no coinciden');
+      return;
+    }
+    if (this.vehi.patente == '') {
+      alert('patente esta vacia ingrese patente')
+      return;
+    }
+    if (this.vehi.licencia == '') {
+      alert('licencia esta vacia ingrese licencia')
+      return;
+    }
+    this.vehi.setValue(this.vehi);
+
     this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.controls.run.value && us.correo == this.usuario.controls.correo.value)
       if (this.usuarioExiste == undefined){
       this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);

@@ -51,7 +51,7 @@ export class InicioCPage implements OnInit {
         this.ubicacionActual.lng = ubi.coords.longitude;
         this.traerMapa();
         this.encontarUbicacion(this.mapa, this.marcador);
-        await this.loadViajes();
+        this.loadViajes();
         this.rut = this.usuario.run;
     }
 
@@ -74,17 +74,16 @@ export class InicioCPage implements OnInit {
     async crearViaje() {
         this.fireService.agregar(this.KEY_VIAJES, this.viaje);
         
-       /*  this.viaje.id = '';
         this.viaje.inicio = this.ubicacionDuoc;
         this.viaje.destino = this.ubicacionActual;
         this.viaje.runCond = this.rut;
         this.viaje.destino_palabra = this.valor_caja;
-
-        var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
+        alert('Viaje Creado');
+        /* var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
         if (res) {
             alert('Viaje Creado');
             await this.loadViajes();
-        } */
+        }  */
     }
 
     //Inicio mapa
