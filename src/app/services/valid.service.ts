@@ -8,13 +8,13 @@ export class ValidService {
   constructor() { }
 
   validRun(run): boolean {
-    var formSimple = run.replace('.', '').replace('.', '').replace('-', '');
-    formSimple = formSimple.substring(0, formSimple.length - 1);
-    var runArreglo: any[] = formSimple.split('').reverse();
+    var rutSimple = run.replace('.', '').replace('.', '').replace('-', '');
+    rutSimple = rutSimple.substring(0, rutSimple.length - 1);
+    var rutArreglo: any[] = rutSimple.split('').reverse();
 
     var acumulador: number = 0;
     var multiplo: number = 2;
-    for (let digito of runArreglo) {
+    for (let digito of rutArreglo) {
       acumulador = acumulador + digito * multiplo;
       multiplo++;
       if (multiplo > 7) {
@@ -29,8 +29,8 @@ export class ValidService {
       dvCalculado = 'K';
     }
 
-    var dvRun: string = run.substring(run.length - 1).toUpperCase();
-    if (dvRun == dvCalculado.toString()) {
+    var dvRut: string = run.substring(run.length - 1).toUpperCase();
+    if (dvRut == dvCalculado.toString()) {
       return true;
     } else {
       return false;

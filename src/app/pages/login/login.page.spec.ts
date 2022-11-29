@@ -26,11 +26,4 @@ describe('Pruebas unitarias: Login', ()=>{
     expect(app).toBeTruthy();
   });
 
-
-  it('2. Login invalido', ()=>{
-    const fixture = TestBed.createComponent(LoginPage);
-    const app = fixture.componentInstance;
-
-    
-  })
 })
