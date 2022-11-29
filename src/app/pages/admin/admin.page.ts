@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
-import { StorageService } from 'src/app/services/storage.service';
 import { ValidService } from 'src/app/services/valid.service';
 
 @Component({
@@ -47,7 +46,9 @@ export class AdminPage implements OnInit {
   registrado : boolean = false 
   id_nuevo: any = '';
   usuarioExiste : any = '';
-  constructor(private router: Router, private storage: StorageService, private loading: LoadingController, private fireService: FireService, private validoService: ValidService ) { }
+
+  v_registrar: boolean = false;
+  constructor(private router: Router, private loading: LoadingController, private fireService: FireService, private validoService: ValidService ) { }
 
   ngOnInit() {
     //await this.loadInfos();
@@ -88,6 +89,7 @@ export class AdminPage implements OnInit {
     this.usuarioExiste = this.usuarios.find(us => us.run == this.usuario.controls.run.value && us.correo == this.usuario.controls.correo.value)
       if (this.usuarioExiste == undefined){
       this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
+      this.v_registrar = true;
       alert('Usuario registrado');
       this.usuario.reset();
       }else{
