@@ -4,6 +4,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { Icon } from 'ionicons/dist/types/components/icon/icon';
 
 import { FireService } from 'src/app/services/fire.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -54,6 +55,8 @@ export class LoginPage implements OnInit {
       };
       if (this.usuarioLogin.tipo_usuario == 'administrador') {
         this.router.navigate(['/admin'], navigationExtras);
+      } else if (this.usuarioLogin.tipo_usuario == 'administradorPrefe') {
+          this.router.navigate(['/admin'], navigationExtras);  
       } else if (this.usuarioLogin.tipo_usuario == 'pasajero') {
         this.router.navigate(['/inicio'], navigationExtras);
       } else if (this.usuarioLogin.tipo_usuario == 'conductor') {
