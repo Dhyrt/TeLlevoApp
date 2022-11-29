@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
     correo: '',
     password: '' 
   }; */
-  constructor(private toastController: ToastController, private router: Router, private storageService: StorageService, private fireService: FireService) { }
+  constructor(private toastController: ToastController, private router: Router, private fireService: FireService) { }
 
 
   ngOnInit() {
