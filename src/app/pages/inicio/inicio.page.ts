@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
 
 
@@ -35,7 +36,7 @@ export class InicioPage implements OnInit {
         pasRuns: []
     };
     id_nuevo2: any = '';
-    constructor(private router: Router, private fireService: FireService) { }
+    constructor(private router: Router, private fireService: FireService, private toastController: ToastController) { }
 
     async ngOnInit() {
         this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
@@ -48,7 +49,7 @@ export class InicioPage implements OnInit {
         this.rut = this.usuario.run;
     }
 
-    perfil(){
+    perfil() {
         var navigationExtras: NavigationExtras = {
             state: {
                 usuario: this.usuario
@@ -61,27 +62,37 @@ export class InicioPage implements OnInit {
         this.viajes = await this.storage.getInfosV(this.KEY_VIAJES);
         console.log(this.viajes)
     } */
-    loadViajes(){
+    loadViajes() {
         this.fireService.getInfos(this.KEY_VIAJES).subscribe(
             info => {
-              this.viajes = [];
-              for(let viaje of info){
-                console.log( viaje.payload.doc.data() );
-                let vi = viaje.payload.doc.data();
-                vi['id'] = viaje.payload.doc.id;
-                this.viajes.push( vi );
-                this.id_nuevo2 = this.viaje.id; 
-              }
+                this.viajes = [];
+                for (let viaje of info) {
+                    //console.log( viaje.payload.doc.data() );
+                    let vi: any = viaje.payload.doc.data();
+                    vi['id'] = viaje.payload.doc.id;
+                    let esta: boolean = false;
+                    for (let rut of vi.pasRuns) {
+                        console.log(rut)
+                        if (rut != this.rut) {
+                            this.id_nuevo2 = this.viaje.id;
+                            esta = true;
+                        }; 
+                    };
+                    if (esta) { 
+                        this.viajes.push(vi);
+                     } 
+                }
             }
-          );
+        );
 
     }
 
     async tomarViaje(id_viaje) {
-        
-        let indice = this.viajes.findIndex(v => v.id == id_viaje)
-        this.viajes[indice].pasRuns.push(this.rut);
-        this.fireService.modificarViajesExistentes(this.KEY_VIAJES, this.id_nuevo2, this.viaje )
+
+        let viaje = this.viajes.find(v => v.id == id_viaje)
+
+        this.viaje.pasRuns.push(this.rut);
+        this.fireService.modificarViajesExistentes(this.KEY_VIAJES, viaje.id, this.viaje)
         //this.viaje.pasRuns = [this.rut];
         //var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
         //await this.storage.modificarViajesExistentes(this.KEY_VIAJES, this.viajes);
@@ -89,11 +100,13 @@ export class InicioPage implements OnInit {
           alert('Viaje Tomado');
           await this.loadViajes();
         } */
-        alert('Viaje Tomado');}
-    
+        //alert('Viaje Tomado');
+        this.toastgeneral('bottom', 'Viaje Tomado', 'skull-outline')
+    };
 
-  traerMapa() {
-    var map: HTMLElement = document.getElementById('mapa');
+
+    traerMapa() {
+        var map: HTMLElement = document.getElementById('mapa');
 
         this.mapa = new google.maps.Map(map, {
             styles: [
@@ -437,5 +450,14 @@ export class InicioPage implements OnInit {
     }
     async salir() {
         await this.fireService.logout();
+    }
+    async toastgeneral(position: 'bottom', message: string, icon) {
+        const toast = await this.toastController.create({
+            message: message,
+            duration: 3000,
+            position: position,
+            icon: icon
+        });
+        toast.present();
     }
 }

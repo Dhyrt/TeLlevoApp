@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Icon } from 'ionicons/dist/types/components/icon/icon';
 import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -50,7 +52,7 @@ export class RegistroPage implements OnInit {
 
 
   constructor(private usuarioService: UsuariosService, private router: Router, private validoService: ValidService,
-    private fireService: FireService) { }
+    private fireService: FireService, private toastController: ToastController) { }
 
   ngOnInit() {
     //this.usuarios = this.usuarioService.obtenerUsuarios()
@@ -82,29 +84,35 @@ export class RegistroPage implements OnInit {
     //alert('test')
      //Validacion run
      if(!this.validoService.validRun(this.usuario.controls.run.value)){
-      alert("Rut invalido");
+      //alert("Rut invalido");
+      this.toastgeneral('bottom','Rut invalido','skull-outline')
       return;
     }
     //Validacion edad
     if(!this.validoService.validEdad(17, this.usuario.controls.fNac.value)){
-      alert("Debe ser mayor de 17 para registrarse");
+      //alert("Debe ser mayor de 17 para registrarse");
+      this.toastgeneral('bottom','Debe ser mayor de 17 para registrarse','skull-outline')
       return;
     }
     //Validacion contraseña
     if (this.usuario.controls.password.value != this.verificar_password) {
-      alert('contraseñas no coinciden');
+      //alert('contraseñas no coinciden');
+      this.toastgeneral('bottom','contraseñas no coinciden','skull-outline')
+      
       return;
     }
     if (this.usuario.controls.password.value != this.verificar_password) {
-      alert('Contraseñas no coinciden');
+      //alert('Contraseñas no coinciden');
+      this.toastgeneral('bottom','contraseñas no coinciden','skull-outline')
       return;
     }
     if (this.vehi.patente == '') {
-      alert('patente esta vacia ingrese patente')
+      //alert('patente esta vacia ingrese patente')
+      this.toastgeneral('bottom','patente esta vacia ingrese patente','skull-outline')
       return;
     }
     if (this.vehi.licencia == '') {
-      alert('licencia esta vacia ingrese licencia')
+      this.toastgeneral('bottom','Campo licencia esta vacio','skull-outline')
       return;
     }
     this.usuario.controls.vehi.setValue(this.vehi);
@@ -113,12 +121,23 @@ export class RegistroPage implements OnInit {
       if (this.usuarioExiste == undefined){
       this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
       this.v_registrar = true;
-      alert('Usuario registrado');
+      this.toastgeneral('bottom','Usuario registrado','thumbs-up-outline')
       this.usuario.reset();
       this.router.navigate(['/login']);
       }else{
-        alert('Usuario ya esta Registrado')
+        
+        this.toastgeneral('bottom','Usuario registrado','skull-outline')
       }
   }
-
+  async toastgeneral(position: 'bottom', message: string, icon) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      icon: icon
+    });
+    toast.present();
+  }
 }
+//"thumbs-up-outline"
+//'skull-outline'

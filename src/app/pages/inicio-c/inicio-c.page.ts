@@ -89,12 +89,11 @@ export class InicioCPage implements OnInit {
     }
 
     async crearViaje() {
-        this.fireService.agregar(this.KEY_VIAJES, this.viaje);
-        
         this.viaje.inicio = this.ubicacionDuoc;
         this.viaje.destino = this.ubicacionActual;
         this.viaje.runCond = this.rut;
         this.viaje.destino_palabra = this.valor_caja;
+        this.fireService.agregar(this.KEY_VIAJES, this.viaje);
         alert('Viaje Creado');
         /* var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
         if (res) {
