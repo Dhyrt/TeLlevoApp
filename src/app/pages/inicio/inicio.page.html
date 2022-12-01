@@ -34,7 +34,7 @@
               <ion-item>
                 <ion-label>Valor: {{v.valor}}</ion-label>
               </ion-item>
-              <ion-button (click)="tomarViaje(v.id)">Tomar</ion-button>
+              <ion-button (click)="tomarViaje(v.id)"[disabled]="v.valor == ''">Tomar</ion-button>
             </ion-card-content>
           </ion-card>
       </ion-list>

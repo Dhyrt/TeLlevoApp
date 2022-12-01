@@ -21,7 +21,7 @@ export class InicioPage implements OnInit {
     ubicacionActual = { lat: 0, lng: 0 }
 
     usuario: any;
-    rut: any;
+    run: any;
 
     viajes: any[] = [];
     KEY_VIAJES = 'viajes';
@@ -46,7 +46,7 @@ export class InicioPage implements OnInit {
         this.traerMapa();
         this.encontarUbicacion(this.mapa, this.marcador);
         this.loadViajes();
-        this.rut = this.usuario.run;
+        this.run = this.usuario.run;
     }
 
     perfil() {
@@ -71,16 +71,16 @@ export class InicioPage implements OnInit {
                     let vi: any = viaje.payload.doc.data();
                     vi['id'] = viaje.payload.doc.id;
                     let esta: boolean = false;
-                    for (let rut of vi.pasRuns) {
+                     for (let rut of vi.pasRuns) {
                         console.log(rut)
-                        if (rut != this.rut) {
-                            this.id_nuevo2 = this.viaje.id;
-                            esta = true;
-                        }; 
-                    };
-                    if (esta) { 
+                        /* if (rut != this.run) {
+                            this.id_nuevo2 = this.viaje.id;*/
+                            esta = true; 
+                       // }; 
+                    }; 
+                    //if (esta) { 
                         this.viajes.push(vi);
-                     } 
+                    // } 
                 }
             }
         );
@@ -91,7 +91,7 @@ export class InicioPage implements OnInit {
 
         let viaje = this.viajes.find(v => v.id == id_viaje)
 
-        this.viaje.pasRuns.push(this.rut);
+        this.viaje.pasRuns.push(this.run);
         this.fireService.modificarViajesExistentes(this.KEY_VIAJES, viaje.id, this.viaje)
         //this.viaje.pasRuns = [this.rut];
         //var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
