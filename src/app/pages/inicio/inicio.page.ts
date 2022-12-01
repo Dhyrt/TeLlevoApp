@@ -70,14 +70,14 @@ export class InicioPage implements OnInit {
                     //console.log( viaje.payload.doc.data() );
                     let vi: any = viaje.payload.doc.data();
                     vi['id'] = viaje.payload.doc.id;
-                    let esta: boolean = false;
+                    //let esta: boolean = false;
                      for (let rut of vi.pasRuns) {
                         console.log(rut)
                         this.id_nuevo2 = rut
                         console.log(this.id_nuevo2)
                         /* if (rut != this.run) {
                             ;*/
-                            esta = true; 
+                           // esta = true; 
                        // }; 
                     }; 
                     //if (esta) { 
