@@ -85,34 +85,34 @@ export class RegistroPage implements OnInit {
      //Validacion run
      if(!this.validoService.validRun(this.usuario.controls.run.value)){
       //alert("Rut invalido");
-      this.toastgeneral('bottom','Rut invalido','skull-outline')
+      this.toastgeneral('bottom','Rut invalido')
       return;
     }
     //Validacion edad
     if(!this.validoService.validEdad(17, this.usuario.controls.fNac.value)){
       //alert("Debe ser mayor de 17 para registrarse");
-      this.toastgeneral('bottom','Debe ser mayor de 17 para registrarse','skull-outline')
+      this.toastgeneral('bottom','Debe ser mayor de 17 para registrarse')
       return;
     }
     //Validacion contraseña
     if (this.usuario.controls.password.value != this.verificar_password) {
       //alert('contraseñas no coinciden');
-      this.toastgeneral('bottom','contraseñas no coinciden','skull-outline')
+      this.toastgeneral('bottom','contraseñas no coinciden')
       
       return;
     }
     if (this.usuario.controls.password.value != this.verificar_password) {
       //alert('Contraseñas no coinciden');
-      this.toastgeneral('bottom','contraseñas no coinciden','skull-outline')
+      this.toastgeneral('bottom','contraseñas no coinciden')
       return;
     }
     if (this.vehi.patente == '') {
       //alert('patente esta vacia ingrese patente')
-      this.toastgeneral('bottom','patente esta vacia ingrese patente','skull-outline')
+      this.toastgeneral('bottom','patente esta vacia ingrese patente')
       return;
     }
     if (this.vehi.licencia == '') {
-      this.toastgeneral('bottom','Campo licencia esta vacio','skull-outline')
+      this.toastgeneral('bottom','Campo licencia esta vacio')
       return;
     }
     this.usuario.controls.vehi.setValue(this.vehi);
@@ -121,20 +121,29 @@ export class RegistroPage implements OnInit {
       if (this.usuarioExiste == undefined){
       this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
       this.v_registrar = true;
-      this.toastgeneral('bottom','Usuario registrado','thumbs-up-outline')
+      this.toastgeneral('bottom','Usuario registrado')
       this.usuario.reset();
       this.router.navigate(['/login']);
       }else{
         
-        this.toastgeneral('bottom','Usuario registrado','skull-outline')
+        this.toastgeneral2('bottom','Usuario registrado')
       }
   }
-  async toastgeneral(position: 'bottom', message: string, icon) {
+  async toastgeneral(position, message: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
       position: position,
-      icon: icon
+      icon: 'skull-outline'
+    });
+    toast.present();
+  }
+  async toastgeneral2(position , message: string ) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      icon: 'thumbs-up-outline'
     });
     toast.present();
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, ToastController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -42,7 +42,8 @@ export class InicioCPage implements OnInit {
     };
 
 
-    constructor(private router: Router, private storage: StorageService, private fireService : FireService, public navCrtl: NavController) { }
+    constructor(private router: Router, private storage: StorageService, private fireService : FireService, public navCrtl: NavController,
+        private toastController: ToastController) { }
 
     async ngOnInit() {
         this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
@@ -94,7 +95,8 @@ export class InicioCPage implements OnInit {
         this.viaje.runCond = this.rut;
         this.viaje.destino_palabra = this.valor_caja;
         this.fireService.agregar(this.KEY_VIAJES, this.viaje);
-        alert('Viaje Creado');
+        this.toastgeneral('top','Viaje Creado')
+        //alert('Viaje Creado');
         /* var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
         if (res) {
             alert('Viaje Creado');
@@ -450,5 +452,14 @@ export class InicioCPage implements OnInit {
     async salir() {
         await this.fireService.logout();
     }
+    async toastgeneral(position , message: string, ) {
+        const toast = await this.toastController.create({
+          message: message,
+          duration: 3000,
+          position: position,
+          icon: 'thumbs-up-outline'
+        });
+        toast.present();
+      }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Alert } from 'selenium-webdriver';
 import { FireService } from 'src/app/services/fire.service';
 import { ValidService } from 'src/app/services/valid.service';
@@ -49,7 +49,8 @@ export class AdminPage implements OnInit {
   usuarioExiste : any = '';
   tipo_usuario: any = '';
   v_registrar: boolean = false;
-  constructor(private router: Router, private loading: LoadingController, private fireService: FireService, private validoService: ValidService ) { }
+  constructor(private router: Router, private loading: LoadingController, private fireService: FireService, private validoService: ValidService,
+    private toastController: ToastController ) { }
 
   ngOnInit() {
     //await this.loadInfos();
@@ -76,29 +77,35 @@ export class AdminPage implements OnInit {
     //alert('test')
      //Validacion run
      if(!this.validoService.validRun(this.usuario.controls.run.value)){
+      this.toastgeneral('top','Rut invalido')
       alert("Rut invalido");
       return;
     }
     //Validacion edad
     if(!this.validoService.validEdad(17, this.usuario.controls.fNac.value)){
-      alert("Debe ser mayor de 17 para registrarse");
+      this.toastgeneral('top','Debe ser mayor de 17 para registrarse')
+      //alert("Debe ser mayor de 17 para registrarse");
       return;
     }
     //Validacion contraseña
     if (this.usuario.controls.password.value != this.verificar_password) {
-      alert('contraseñas no coinciden');
+      this.toastgeneral('top','Contraseñas no coinciden')
+      //alert('contraseñas no coinciden');
       return;
     }
     if (this.usuario.controls.password.value != this.verificar_password) {
-      alert('Contraseñas no coinciden');
+      this.toastgeneral('top','Contraseñas no coinciden')
+      //alert('Contraseñas no coinciden');
       return;
     }
     if (this.vehi.patente == '') {
-      alert('patente esta vacia ingrese patente')
+      this.toastgeneral('top','Campo patente esta vacio')
+      //alert('patente esta vacia ingrese patente')
       return;
     }
     if (this.vehi.licencia == '') {
-      alert('licencia esta vacia ingrese licencia')
+      this.toastgeneral('top','Campo licencia esta vacio')
+      //alert('licencia esta vacia ingrese licencia')
       return;
     }
     this.usuario.controls.vehi.setValue(this.vehi);
@@ -107,11 +114,13 @@ export class AdminPage implements OnInit {
       if (this.usuarioExiste == undefined){
       this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
       this.v_registrar = true;
-      alert('Usuario registrado');
+      this.toastgeneral2('top','Usuario registrado')
+      //alert('Usuario registrado');
       this.usuario.reset();
       this.limpiar();
       }else{
-        alert('Usuario ya esta Registrado')
+        this.toastgeneral('top','Usuario ya esta Registrado')
+        //alert('Usuario ya esta Registrado')
       }
   }
 /*   async registrar() {
@@ -144,6 +153,7 @@ export class AdminPage implements OnInit {
     this.fireService.eliminar(this.KEY_HUMANOS,id)
     //await this.storage.eliminar(this.KEY_HUMANOS, rutEliminar);
     this.loadInfos();
+    this.toastgeneral('top','Usuario Eliminado')
   }
 
   /* async buscar(rutBuscar) {
@@ -170,6 +180,7 @@ buscar(id){
     this.fireService.actualizar(this.KEY_HUMANOS, this.id_nuevo, this.usuario.value)
     this.usuario.reset();
     this.id_nuevo = '';
+    this.toastgeneral2('top','Usuario Actualizado')
   }
   limpiar() {
     this.vehi = {
@@ -188,4 +199,22 @@ buscar(id){
     await this.fireService.logout();
   }
 
+  async toastgeneral(position, message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      icon: 'skull-outline'
+    });
+    toast.present();
+  }
+  async toastgeneral2(position , message: string ) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      icon: 'thumbs-up-outline'
+    });
+    toast.present();
+  }
 }

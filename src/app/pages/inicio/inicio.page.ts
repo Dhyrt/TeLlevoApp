@@ -73,8 +73,9 @@ export class InicioPage implements OnInit {
                     let esta: boolean = false;
                      for (let rut of vi.pasRuns) {
                         console.log(rut)
+                        this.id_nuevo2 = vi.id
                         /* if (rut != this.run) {
-                            this.id_nuevo2 = this.viaje.id;*/
+                            ;*/
                             esta = true; 
                        // }; 
                     }; 
@@ -89,10 +90,13 @@ export class InicioPage implements OnInit {
 
     async tomarViaje(id_viaje) {
 
-        let viaje = this.viajes.find(v => v.id == id_viaje)
-
+        let viajeN = this.viajes.find(v => v.id == id_viaje)
+        this.viaje = viajeN
+        
         this.viaje.pasRuns.push(this.run);
-        this.fireService.modificarViajesExistentes(this.KEY_VIAJES, viaje.id, this.viaje)
+        
+        //this.fireService.actualizar(this.KEY_VIAJES, this.id_nuevo2, this.viaje)
+        this.fireService.modificarViajesExistentes(this.KEY_VIAJES, viajeN.id, this.viaje)
         //this.viaje.pasRuns = [this.rut];
         //var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);
         //await this.storage.modificarViajesExistentes(this.KEY_VIAJES, this.viajes);
@@ -101,7 +105,7 @@ export class InicioPage implements OnInit {
           await this.loadViajes();
         } */
         //alert('Viaje Tomado');
-        this.toastgeneral('bottom', 'Viaje Tomado', 'skull-outline')
+        this.toastgeneral('middle', 'Viaje Tomado')
     };
 
 
@@ -451,12 +455,12 @@ export class InicioPage implements OnInit {
     async salir() {
         await this.fireService.logout();
     }
-    async toastgeneral(position: 'bottom', message: string, icon) {
+    async toastgeneral(position, message: string) {
         const toast = await this.toastController.create({
             message: message,
             duration: 3000,
             position: position,
-            icon: icon
+            icon: 'thumbs-up-outline'
         });
         toast.present();
     }
