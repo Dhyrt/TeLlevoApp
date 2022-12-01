@@ -73,7 +73,8 @@ export class InicioPage implements OnInit {
                     let esta: boolean = false;
                      for (let rut of vi.pasRuns) {
                         console.log(rut)
-                        this.id_nuevo2 = vi.id
+                        this.id_nuevo2 = rut
+                        console.log(this.id_nuevo2)
                         /* if (rut != this.run) {
                             ;*/
                             esta = true; 
@@ -94,7 +95,7 @@ export class InicioPage implements OnInit {
         this.viaje = viajeN
         
         this.viaje.pasRuns.push(this.run);
-        
+        this.id_nuevo2 = this.run
         //this.fireService.actualizar(this.KEY_VIAJES, this.id_nuevo2, this.viaje)
         this.fireService.modificarViajesExistentes(this.KEY_VIAJES, viajeN.id, this.viaje)
         //this.viaje.pasRuns = [this.rut];

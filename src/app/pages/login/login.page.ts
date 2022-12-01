@@ -62,6 +62,7 @@ export class LoginPage implements OnInit {
       } else if (this.usuarioLogin.tipo_usuario == 'conductor') {
         this.router.navigate(['/inicio-c'], navigationExtras);
       }
+      this.limpiar();
     } else {
       this.toastError('bottom', 'Usuario o contraseña Incorrectos!!!');
       //console.log(this.usuario)
@@ -75,6 +76,11 @@ export class LoginPage implements OnInit {
       icon: 'skull-outline'
     });
     toast.present();
+  }
+  
+  limpiar() {
+    this.correo = '';
+    this.password= '';
   }
 
   

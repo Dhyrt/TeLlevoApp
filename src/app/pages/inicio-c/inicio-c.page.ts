@@ -461,5 +461,6 @@ export class InicioCPage implements OnInit {
         });
         toast.present();
       }
+    
 
 }
