@@ -78,7 +78,7 @@ export class AdminPage implements OnInit {
      //Validacion run
      if(!this.validoService.validRun(this.usuario.controls.run.value)){
       this.toastgeneral('top','Rut invalido')
-      alert("Rut invalido");
+      //alert("Rut invalido");
       return;
     }
     //Validacion edad
@@ -98,6 +98,7 @@ export class AdminPage implements OnInit {
       //alert('Contraseñas no coinciden');
       return;
     }
+    if (this.usuario.controls.tipo_usuario.value == 'conductor'){
     if (this.vehi.patente == '') {
       this.toastgeneral('top','Campo patente esta vacio')
       //alert('patente esta vacia ingrese patente')
@@ -114,14 +115,15 @@ export class AdminPage implements OnInit {
       if (this.usuarioExiste == undefined){
       this.fireService.agregar(this.KEY_HUMANOS, this.usuario.value);
       this.v_registrar = true;
-      this.toastgeneral2('top','Usuario registrado')
+      this.toastgeneral2('top','Usuario registrado Exitosamente')
       //alert('Usuario registrado');
       this.usuario.reset();
       this.limpiar();
       }else{
-        this.toastgeneral('top','Usuario ya esta Registrado')
+        this.toastgeneral('top','Usuario ya esta Registrado',)
         //alert('Usuario ya esta Registrado')
       }
+    }
   }
 /*   async registrar() {
     if (this.usuario.controls.password.value != this.verificar_password) {
@@ -153,7 +155,7 @@ export class AdminPage implements OnInit {
     this.fireService.eliminar(this.KEY_HUMANOS,id)
     //await this.storage.eliminar(this.KEY_HUMANOS, rutEliminar);
     this.loadInfos();
-    this.toastgeneral('top','Usuario Eliminado')
+    this.toastgeneral('top','Usuario Eliminado Exitosamente')
   }
 
   /* async buscar(rutBuscar) {
@@ -180,9 +182,10 @@ buscar(id){
     this.fireService.actualizar(this.KEY_HUMANOS, this.id_nuevo, this.usuario.value)
     this.usuario.reset();
     this.id_nuevo = '';
-    this.toastgeneral2('top','Usuario Actualizado')
+    this.toastgeneral2('top','Usuario Actualizado Exitosamente')
   }
   limpiar() {
+    this.usuario.reset();
     this.vehi = {
       marca: '',
       modelo: '', 
