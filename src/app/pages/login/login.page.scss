@@ -6,7 +6,7 @@
   }
   
 ion-card {
-  --background: linear-gradient(#ffffffbe, #2f64a05e);
+  --background: linear-gradient(#ffffffc4, #2f64a0c0);
   margin: 0 auto;
   top: 5vh;
   height: 75vh;
@@ -35,17 +35,6 @@ ion-item {
   --background: none;  
 }
 
-.doble{
-  width: 460px;
-  height: 565px;
-  top: 38px;
-  left: 33.7rem;
-  background-color: #1c2a7757;
-  position: absolute;
-  transform: rotate(-5deg);
-  z-index: 1;
-}
-
   @media (max-width: 400px) {
     .fondo {
         ion-card {
@@ -59,13 +48,6 @@ ion-item {
             --background: none; 
             --padding: none;
         }
-        .doble{
-          width: 233px;
-          height: 443px;
-          top: 3.75rem;
-          left: 1.3rem;
-          transform: rotate(-4deg);
-        } 
     }
 }
 
