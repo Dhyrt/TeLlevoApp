@@ -74,6 +74,7 @@ export class AdminPage implements OnInit {
     );
   }
   registrar (){
+    this.usuario.controls.tipo_usuario.setValue (this.tipo_usuario);
     //alert('test')
      //Validacion run
      if(!this.validoService.validRun(this.usuario.controls.run.value)){
