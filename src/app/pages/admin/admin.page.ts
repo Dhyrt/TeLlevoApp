@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { Alert } from 'selenium-webdriver';
 import { FireService } from 'src/app/services/fire.service';
 import { ValidService } from 'src/app/services/valid.service';
@@ -50,7 +50,7 @@ export class AdminPage implements OnInit {
   tipo_usuario: any = '';
   v_registrar: boolean = false;
   constructor(private router: Router, private loading: LoadingController, private fireService: FireService, private validoService: ValidService,
-    private toastController: ToastController ) { }
+    private toastController: ToastController, private alertController: AlertController ) { }
 
   ngOnInit() {
     //await this.loadInfos();
@@ -152,11 +152,38 @@ export class AdminPage implements OnInit {
     }
   } */
 
-  eliminar(id) {
-    this.fireService.eliminar(this.KEY_HUMANOS,id)
-    //await this.storage.eliminar(this.KEY_HUMANOS, rutEliminar);
-    this.loadInfos();
-    this.toastgeneral('top','Usuario Eliminado Exitosamente')
+  async eliminar(id) {
+    await this.eliminar1(
+    this.fireService.eliminar(this.KEY_HUMANOS,id))
+  } 
+
+  async eliminar1(eliminacion){
+    const alert = await this.alertController.create({
+      header: '¿Estas Seguro de verlo Morir?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.error('no eliminaste nada');
+          },
+        },
+        {
+          text: 'Eliminar',
+          role: 'confirm',
+          
+          handler: () => {
+            eliminacion;
+            this.loadInfos();
+            this.toastgeneral('top','Usuario Eliminado Exitosamente')
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
+
   }
 
   /* async buscar(rutBuscar) {
@@ -167,10 +194,13 @@ export class AdminPage implements OnInit {
 buscar(id){
   this.fireService.getInfo(this.KEY_HUMANOS, id).subscribe(
     (info: any)  => {
-      console.log( info.data() );
+      /* console.error( info.data().tipo_usuario ); */
       this.usuario.setValue( info.data() );
+      this.tipo_usuario = info.data().tipo_usuario
       this.id_nuevo = info.id;
-      this.verificar_password = info.password;
+      this.vehi = info.data().vehi;
+      this.verificar_password = info.data().password;
+      /* console.warn(this.vehi); */
     }
   )
 }
@@ -181,8 +211,10 @@ buscar(id){
   } */
   actualizar(){
     this.fireService.actualizar(this.KEY_HUMANOS, this.id_nuevo, this.usuario.value)
-    this.usuario.reset();
-    this.id_nuevo = '';
+    this.usuario.controls.tipo_usuario.setValue (this.tipo_usuario)
+    console.warn(this.usuario.controls.tipo_usuario)
+    
+    this.limpiar();
     this.toastgeneral2('top','Usuario Actualizado Exitosamente')
   }
   limpiar() {
@@ -197,6 +229,9 @@ buscar(id){
       licencia: ''
     };
     this.verificar_password = '';
+    this.id_nuevo = '';
+    this.tipo_usuario = '';
+ 
   }
 
   async salir() {

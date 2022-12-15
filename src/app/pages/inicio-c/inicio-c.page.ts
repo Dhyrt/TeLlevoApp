@@ -37,10 +37,11 @@ export class InicioCPage implements OnInit {
         destino: { lat: 0, lng: 0 },
         destino_palabra: '',
         valor: '',
+        estado:'',
         capacidad: 4,
         pasRuns: []
     };
-
+    estadoT: string = 'terminado';
 
     constructor(private router: Router, private storage: StorageService, private fireService : FireService, public navCrtl: NavController,
         private toastController: ToastController) { }
@@ -81,9 +82,10 @@ export class InicioCPage implements OnInit {
               this.viajes = [];
               for(let viaje of info){
                 console.log( viaje.payload.doc.data() );
-                let vi = viaje.payload.doc.data();
+                let vi :any= viaje.payload.doc.data();
                 vi['id'] = viaje.payload.doc.id;
                 this.viajes.push( vi );
+                
               }
             }
           );
@@ -94,6 +96,7 @@ export class InicioCPage implements OnInit {
         this.viaje.destino = this.ubicacionActual;
         this.viaje.runCond = this.rut;
         this.viaje.destino_palabra = this.valor_caja;
+        this.viaje.estado = 'disponible';
         this.fireService.agregar(this.KEY_VIAJES, this.viaje);
         this.toastgeneral('top','Viaje Creado')
         //alert('Viaje Creado');
@@ -103,6 +106,17 @@ export class InicioCPage implements OnInit {
             await this.loadViajes();
         }  */
     }
+
+    terminarViaje(id_viaje) {
+
+        let viajeN = this.viajes.find(v => v.id == id_viaje)
+        this.viaje = viajeN  
+        this.viaje.estado == (this.estadoT);
+        
+        this.fireService.modificarViajesExistentes(this.KEY_VIAJES, viajeN.id, this.viaje)
+
+        this.toastgeneral('middle', 'Viaje Terminado con exito')
+    };
 
     //Inicio mapa
     traerMapa() {
