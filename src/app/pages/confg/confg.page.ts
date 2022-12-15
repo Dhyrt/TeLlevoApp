@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 import { FireService } from 'src/app/services/fire.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -11,12 +12,23 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class ConfgPage implements OnInit {
 
-  constructor(private router: Router, private fireService : FireService) { }
+  constructor(private router: Router, private fireService : FireService, private apiService: ApiService) { }
 
   usuario: any;
 
-  ngOnInit() {
+  clima: any[] = [];
+  lugar: any[] = [];
+  desc: any[] = [];
+
+  async ngOnInit() {
     this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
+    let respuesta = await this.apiService.get();
+        respuesta.subscribe( (data:any) => {
+            console.log(data);
+            this.clima = data.main;
+            this.lugar = data;
+            this.desc = data.weather[0];
+        });
   }
 
   async salir() {
