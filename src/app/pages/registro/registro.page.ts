@@ -107,12 +107,12 @@ export class RegistroPage implements OnInit {
       this.toastgeneral('bottom','contraseñas no coinciden')
       return;
     }
-    if (this.vehi.patente == '') {
+    if (this.vehi.patente == '' && this.tipo_usuario == 'conductor') {
       //alert('patente esta vacia ingrese patente')
       this.toastgeneral('bottom','patente esta vacia ingrese patente')
       return;
     }
-    if (this.vehi.licencia == '') {
+    if (this.vehi.licencia == '' && this.tipo_usuario == 'conductor') {
       this.toastgeneral('bottom','Campo licencia esta vacio')
       return;
     }
