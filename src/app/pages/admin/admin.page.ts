@@ -63,9 +63,9 @@ export class AdminPage implements OnInit {
       info => {
         this.usuarios = [];
         for (let usuario of info) {
-          console.log(usuario.payload.doc.data());
+          //console.log(usuario.payload.doc.data());
           let us: any = usuario.payload.doc.data(); 
-          console.log (us)           
+          //console.log (us)           
           us['id'] = usuario.payload.doc.id;
           if (us.tipo_usuario != 'administradorPrefe')  {
             this.usuarios.push(us);}
@@ -210,9 +210,11 @@ buscar(id){
     this.limpiar();
   } */
   actualizar(){
+    console.warn(this.id_nuevo)
+    console.error(this.usuario.value)
     this.fireService.actualizar(this.KEY_HUMANOS, this.id_nuevo, this.usuario.value)
-    this.usuario.controls.tipo_usuario.setValue (this.tipo_usuario)
-    console.warn(this.usuario.controls.tipo_usuario)
+    /* this.usuario.controls.tipo_usuario.setValue (this.tipo_usuario) */
+    /* console.warn(this.usuario.controls.tipo_usuario) */
     
     this.limpiar();
     this.toastgeneral2('top','Usuario Actualizado Exitosamente')

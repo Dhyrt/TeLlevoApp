@@ -30,7 +30,7 @@ export class InicioCPage implements OnInit {
 
     viajes: any[] = [];
     KEY_VIAJES = 'viajes';
-    viaje = {
+    viaje:any =  {
         id: '',
         runCond: '',
         inicio: { lat: 0, lng: 0 },
@@ -55,6 +55,7 @@ export class InicioCPage implements OnInit {
         this.encontarUbicacion(this.mapa, this.marcador);
         this.loadViajes();
         this.rut = this.usuario.run;
+
     }
 
     perfil(){
@@ -84,8 +85,9 @@ export class InicioCPage implements OnInit {
                 console.log( viaje.payload.doc.data() );
                 let vi :any= viaje.payload.doc.data();
                 vi['id'] = viaje.payload.doc.id;
+                if (vi.estado != 'terminado')  {
                 this.viajes.push( vi );
-                
+                }
               }
             }
           );
@@ -111,11 +113,11 @@ export class InicioCPage implements OnInit {
 
         let viajeN = this.viajes.find(v => v.id == id_viaje)
         this.viaje = viajeN  
-        this.viaje.estado == (this.estadoT);
+        this.viaje.estado =this.estadoT;
         
         this.fireService.modificarViajesExistentes(this.KEY_VIAJES, viajeN.id, this.viaje)
 
-        this.toastgeneral('middle', 'Viaje Terminado con exito')
+        this.toastgeneral2('middle', 'Viaje Terminado con exito recuerde cobrar el valor del viaje')
     };
 
     //Inicio mapa
@@ -475,6 +477,14 @@ export class InicioCPage implements OnInit {
         });
         toast.present();
       }
-    
+      async toastgeneral2(position , message: string, ) {
+        const toast = await this.toastController.create({
+          message: message,
+          duration: 5000,
+          position: position,
+          icon: 'thumbs-up-outline'
+        });
+        toast.present();
+      }
 
 }

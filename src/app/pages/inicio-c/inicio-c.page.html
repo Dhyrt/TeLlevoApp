@@ -34,8 +34,8 @@
     </div>
       <ion-list *ngFor="let v of viajes">
         <p>{{v.runCond}} - {{v.valor}} - {{v.estado}} - {{v.destino_palabra}}</p>
-        <div class="botones">
-          <ion-button  (click)="terminarViaje()">Terminar Viaje</ion-button>
+        <div class="botones" *ngIf=" v.runCond == this.rut">
+          <ion-button  (click)="terminarViaje(v.id)">Terminar Viaje</ion-button>
         </div>
       </ion-list>
     <!-- <div class="item-2" >

@@ -19,6 +19,7 @@ export class InicioPage implements OnInit {
     directionsRenderer = new google.maps.DirectionsRenderer();
 
     ubicacionActual = { lat: 0, lng: 0 }
+    ubicacionDuoc = { lat: -33.597835629011804, lng: -70.57911395425506 }
 
     usuario: any;
     run: any;
@@ -75,14 +76,11 @@ export class InicioPage implements OnInit {
                         console.log(rut)
                         this.id_nuevo2 = rut
                         console.log(this.id_nuevo2)
-                        /* if (rut != this.run) {
-                            ;*/
-                           // esta = true; 
-                       // }; 
+
                     }; 
-                    //if (esta) { 
+                    if (vi.estado != 'terminado') { 
                         this.viajes.push(vi);
-                    // } 
+                    } 
                 }
             }
         );
