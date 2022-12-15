@@ -33,10 +33,12 @@
       <h2>Viaje</h2>
     </div>
       <ion-list *ngFor="let v of viajes">
+        <div *ngIf=" v.runCond == this.rut">
         <p>{{v.runCond}} - {{v.valor}} - {{v.estado}} - {{v.destino_palabra}}</p>
-        <div class="botones" *ngIf=" v.runCond == this.rut">
+        <div class="botones">
           <ion-button  (click)="terminarViaje(v.id)">Terminar Viaje</ion-button>
         </div>
+      </div>
       </ion-list>
     <!-- <div class="item-2" >
       <ion-label position="stacked">Ganancias del día: $0</ion-label>

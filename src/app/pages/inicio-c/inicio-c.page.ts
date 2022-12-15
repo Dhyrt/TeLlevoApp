@@ -100,6 +100,8 @@ export class InicioCPage implements OnInit {
         this.viaje.destino_palabra = this.valor_caja;
         this.viaje.estado = 'disponible';
         this.fireService.agregar(this.KEY_VIAJES, this.viaje);
+        this.viaje.valor = '';
+        this.valor_caja = '';
         this.toastgeneral('top','Viaje Creado')
         //alert('Viaje Creado');
         /* var res = await this.storage.agViaje(this.KEY_VIAJES, this.viaje);

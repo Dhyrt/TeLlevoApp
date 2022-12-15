@@ -15,10 +15,10 @@ export class ConfgPage implements OnInit {
   constructor(private router: Router, private fireService : FireService, private apiService: ApiService) { }
 
   usuario: any;
-
-  clima: any[] = [];
-  lugar: any[] = [];
-  desc: any[] = [];
+  
+  clima: any = {};
+  lugar: any = {};
+  desc: any = {};
 
   async ngOnInit() {
     this.usuario = this.router.getCurrentNavigation().extras.state.usuario;

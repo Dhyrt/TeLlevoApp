@@ -16,18 +16,19 @@ export class ConfgCPage implements OnInit {
 
   usuario: any;
   
-  clima: any[] = [];
-  lugar: any[] = [];
-  desc: any[] = [];
+  clima: any = {};
+  lugar: any = {};
+  desc: any = {};
 
   async ngOnInit() {
     this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
     let respuesta = await this.apiService.get();
         respuesta.subscribe( (data:any) => {
-            console.log(data);
+            console.warn(data);
             this.clima = data.main;
             this.lugar = data;
             this.desc = data.weather[0];
+            
         });
   }
 
